@@ -3,5 +3,7 @@
  */
 public class DiogoTests {
 
+    private void Test(){
 
+    }
 }
