@@ -10,16 +10,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.After;
 import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 /**
- * Created by Ruben on 27/05/2016.
+ * Created by Ruben on 28/05/2016.
  */
-
-
-public class MaiaTests {
+public class MainPageTest {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -33,18 +33,23 @@ public class MaiaTests {
     }
 
     @Test
-    public void testEmypage() throws Exception {
+    public void testMainPage() throws Exception {
         driver.get(baseUrl + "/");
-        driver.findElement(By.linkText("Rúben Maia Personal Page")).click();
-        assertEquals("Rúben Maia Personal Page", driver.getTitle());
+        assertEquals("Titulo", driver.getTitle());
         try {
-            assertEquals("Rúben Maia Personal Page", driver.getTitle());
+            assertEquals("Titulo", driver.getTitle());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertTrue(isElementPresent(By.cssSelector("h4")));
+        try {
+            assertTrue(isElementPresent(By.cssSelector("h4")));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
     }
 
-    @After
+    @org.junit.After
     public void tearDown() throws Exception {
         driver.quit();
         String verificationErrorString = verificationErrors.toString();
