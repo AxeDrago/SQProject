@@ -28,10 +28,12 @@ public class CliftonTest {
 
     @Test
     public void testCliftonTest() throws  Exception  {
-        System.out.print("Entro");
         driver.get(baseUrl);
-        System.out.print("Entro2");
-        Assert.assertEquals(driver.getTitle(), "Clifton Personal Page - SQ");
+        try {
+            Assert.assertEquals("Clifton Personal Page - SQ", driver.getTitle());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
     }
 
     @AfterClass

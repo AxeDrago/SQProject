@@ -2,3 +2,20 @@ body {
     background-color: lightgrey;
 }
 
+h1{
+    text-align: center;
+    padding-bottom: 15px;
+}
+#description{
+    display: inline-block;
+    vertical-align:top;
+
+}
+#image{
+    display: inline-block;
+    width: 400px;
+    height: 350px;
+    padding-left: 10px;
+
+   /* width="400" height="350" */
+}
