@@ -1,4 +1,4 @@
-import javafx.scene.control.Alert;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,11 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
-
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
