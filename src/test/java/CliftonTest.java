@@ -19,18 +19,19 @@ public class CliftonTest {
     @BeforeClass
     public static void setUp() throws Exception {
        //driver = new FirefoxDriver();
-        driver = new HtmlUnitDriver();
+       driver = new HtmlUnitDriver();
        baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/CluniePersonal.html";
+       //baseUrl = "http://127.0.0.1:8080/CluniePersonal.html";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-       //driver.get(baseUrl);
-       //Assert.assertEquals(driver.getTitle(), "Clifton Personal Page - SQ");
+
     }
 
     @Test
     public void testCliftonTest() throws  Exception  {
         driver.get(baseUrl);
+        Assert.assertEquals("Clifton Personal Page - SQ", driver.getTitle());
         try {
-            Assert.assertEquals("Clifton Personal Page - SQ", driver.getTitle());
+            Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "Clifton Clunie MEICM - STUDENT");
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
