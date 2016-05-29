@@ -34,7 +34,13 @@ public class CliftonTest {
             Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MEICM - STUDENT");
         } catch (Error e) {
             verificationErrors.append(e.toString());
-        }
+            }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("//p[2]")).getText(), "Panama");
+            } catch (Error e) {
+                verificationErrors.append(e.toString());
+            }
+
     }
 
     @AfterClass
