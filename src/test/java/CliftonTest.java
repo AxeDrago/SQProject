@@ -31,7 +31,7 @@ public class CliftonTest {
         driver.get(baseUrl);
         Assert.assertEquals("Clifton Personal Page - SQ", driver.getTitle());
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "Clifton Clunie MEICM - STUDENT");
+            Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MEICM - STUDENT");
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
