@@ -21,7 +21,7 @@ public class CliftonTest {
     public static void setUp() throws Exception {
        //driver = new FirefoxDriver();
        driver = new HtmlUnitDriver();
-       baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/CluniePersonal.html";
+       baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
        //baseUrl = "http://127.0.0.1:8080/CluniePersonal.html";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
@@ -31,6 +31,7 @@ public class CliftonTest {
     @Test
     public void testCliftonTest() throws  Exception  {
         driver.get(baseUrl);
+        driver.findElement(By.xpath("//a[contains(text(),'Clifton Clunie - Personal Page')]")).click();
         Assert.assertEquals("Clifton Personal Page - SQ", driver.getTitle());
         try {
             Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MEICM - STUDENT");
@@ -78,7 +79,6 @@ public class CliftonTest {
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
-
 
     }
 
