@@ -21,8 +21,8 @@ public class CliftonTest {
     public static void setUp() throws Exception {
        //driver = new FirefoxDriver();
        driver = new HtmlUnitDriver();
-       //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/CluniePersonal.html";
-       baseUrl = "http://127.0.0.1:8080/CluniePersonal.html";
+       baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/CluniePersonal.html";
+       //baseUrl = "http://127.0.0.1:8080/CluniePersonal.html";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 
