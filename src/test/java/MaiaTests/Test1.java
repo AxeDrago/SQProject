@@ -4,7 +4,7 @@ package MaiaTests;
  * Created by Ruben on 30/05/2016.
  */
 
-import org.apache.xpath.operations.String;
+import java.lang.String;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
