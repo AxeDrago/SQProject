@@ -32,9 +32,9 @@ public class MainPageTest {
     @Test
     public void testMainPage() throws Exception {
         driver.get(baseUrl + "/");
-        assertEquals("Titulo", driver.getTitle());
+        assertEquals("SQ Project Pipeline", driver.getTitle());
         try {
-            assertEquals("Titulo", driver.getTitle());
+            assertEquals("SQ Project Pipeline", driver.getTitle());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
