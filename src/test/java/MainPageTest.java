@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +24,7 @@ public class MainPageTest {
 
     @org.junit.Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
+        driver = new HtmlUnitDriver();
         baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
