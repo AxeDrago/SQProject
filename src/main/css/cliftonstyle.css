@@ -1,5 +1,10 @@
 body {
     background-color: lightgrey;
+    font-family: Calibri;
+}
+body h1
+{
+    font-style:normal;
 }
 
 h1{
@@ -9,13 +14,16 @@ h1{
 
 #image_container{
     display: inline;
+    padding-right: 10px;
 }
 
 #description_wrapper{
     float: right;
 }
 #description_wrapper h3, p {
-//    display: inline-block;
+   /*display: inline-block; */
+    line-height: 50%;
+    vertical-align: top;
 
 }
 
