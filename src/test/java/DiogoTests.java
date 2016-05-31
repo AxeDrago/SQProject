@@ -171,6 +171,54 @@ public class DiogoTests {
     }
 
 
+    @Test
+    public void testPersonalPagePersonSkillsExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[6]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("skills")).isDisplayed());
+    }
+
+    @Test
+    public void testPersonalPagePersonSocialMediaExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[7]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("socialM")).isDisplayed());
+    }
+
+    @Test
+    public void testPersonalPagePersonSocialMediaFacebookIsWorking() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[7]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("socialM")).isDisplayed());
+        driver.findElement(By.xpath("//a[contains(text(),'Facebook')]")).click();
+        assertTrue(driver.getTitle().matches(".*"+"Diogo" + ".*" + "Bernardo" + ".*" + "Facebook" + ".*" ));
+    }
+
+    @Test
+    public void testPersonalPagePersonSocialMediaLinkedInIsWorking() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[7]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("socialM")).isDisplayed());
+        driver.findElement(By.xpath("//a[contains(text(),'LinkedIn')]")).click();
+        assertTrue(driver.getTitle().matches(".*"+"Diogo" + ".*" + "Bernardo" + ".*" + "Lopes" + ".*" + ".*" + "LinkedIn" + ".*" ));
+    }
+
+    @Test
+    public void testPersonalPagePersonSocialMediaTwitterIsWorking() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[7]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("socialM")).isDisplayed());
+        driver.findElement(By.xpath("//a[contains(text(),'Twitter')]")).click();
+        assertTrue(driver.getTitle().matches(".*"+ "@DBernardoL" + ".*" + "Twitter" + ".*" ));
+    }
+
+
+
 
 
 
