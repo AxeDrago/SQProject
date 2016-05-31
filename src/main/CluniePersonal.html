@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Clifton Personal Page - SQ</title>
     <link rel="stylesheet" href="css/cliftonstyle.css">
-</head>
+    </head>
 <body>
 <h1>MEICM - STUDENT</h1>
 <div id = mainInfo>
@@ -13,25 +13,26 @@
     </div>
     <div id = "description">
         <div id= "description_wrapper">
-            <h3> Name: </h3><p>Clifton Clunie</p>
-            <h3> Country: </h3><p>Panama</p>
-            <h3> Address: </h3><p>Leiria, Portugal</p>
-            <h3> Contacts: </h3><p>+351912103762</p>
-            <h3> CV: </h3><p>CV</p>
-            <h3> Skills: </h3><p>Business Intelligene ETL Tools</p>
-            <h3> Social Media Link:</h3><p>Facebook, Twitter, Instagram Snapchat</p>
-            <h3> Professional Experience: </h3><p> Cibernetica S.A</p>
-
+            <h3> Name: </h3><p id="name"></p>
+            <h3> Country: </h3><p id="country"></p>
+            <h3> Address: </h3><p id="address"></p>
+            <h3> Contacts: </h3><p id="contacts"></p>
+            <h3> CV: </h3><p id="cv"></p>
+            <h3> Skills: </h3><p id="skills"></p>
+            <h3> Social Media Link:</h3><p id="socialM"></p>
+            <h3> Professional Experience: </h3><p id="profExp"></p>
         </div>
+        <script type="text/javascript" src="javascript/functions/functionScripts.js"></script>
+        <script src="javascript/json/memberPageScripts.js"></script>
     </div>
 </div>
     <div id="form">
         <h2>Comments</h2>
-        <label for="name">Name:</label><input type="text" name="name" id="name" /><br />
-        <label for ="email">Email:</label> <input type="text" name="email" id="email" /><br />
-        <label for="comment">Comment:</label><br />
-        <textarea name="comment" id="comment"></textarea><br />
-        <input type="hidden"  id='articleid' value=' ' />
+        <label for="nameComment">Name:</label><input type="text" name="name" id="nameComment" /><br />
+        <label for ="emailComment">Email:</label> <input type="text" name="email" id="emailComment" /><br />
+        <label for="commentComment">Comment:</label><br />
+        <textarea name="comment" id="commentComment"></textarea><br />
+        <input type="hidden"  id="articleId" value=' ' />
         <input type="submit" value="Submit" />
 
     </div>
