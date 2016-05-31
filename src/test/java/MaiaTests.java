@@ -33,6 +33,7 @@ public class MaiaTests{
     public void setUp() throws Exception {
         driver = new HtmlUnitDriver();
         baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
+        //baseUrl = "http://127.0.0.1:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
