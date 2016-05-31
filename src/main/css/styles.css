@@ -2,3 +2,16 @@ body {
     background-color: lightgrey;
 }
 
+.profile {
+    width: 300px;
+    height: 250px;
+    display: inline-block;
+}
+#diogoContent{
+    display: inline-block;
+    text-align: center;
+}
+#cliftonContent{
+    display: inline-block;
+    text-align: center;
+}
