@@ -19,7 +19,7 @@ import static org.junit.Assert.fail;
  */
 public class DiogoTests {
 
-    private static boolean local = true;
+    private static boolean local = false;
     private static WebDriver driver;
     private static String baseUrl;
     private static StringBuffer verificationErrors = new StringBuffer();
