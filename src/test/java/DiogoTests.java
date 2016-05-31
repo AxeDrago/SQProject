@@ -8,6 +8,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.awt.SystemColor.text;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotEquals;
@@ -18,7 +19,7 @@ import static org.junit.Assert.fail;
  */
 public class DiogoTests {
 
-    private static boolean local = false;
+    private static boolean local = true;
     private static WebDriver driver;
     private static String baseUrl;
     private static StringBuffer verificationErrors = new StringBuffer();
@@ -149,6 +150,25 @@ public class DiogoTests {
     }
 
 
+    @Test
+    public void testPersonalPagePersonCurriculumExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[5]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("cv")).isDisplayed());
+    }
+
+
+
+    @Test
+    public void testPersonalPagePersonCurriculumIsCorrect() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[5]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("cv")).isDisplayed());
+        driver.findElement(By.id("cv")).click();
+        assertTrue(driver.getTitle().matches(".*"+ "MEGA"+".*"));
+    }
 
 
 
