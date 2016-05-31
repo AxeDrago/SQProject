@@ -118,6 +118,25 @@ public class DiogoTests {
     }
 
 
+    @Test
+    public void testPersonalPagePersonContactsExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[4]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("address")).isDisplayed());
+    }
+
+
+
+    @Test
+    public void testPersonalPagePersonContactsIsCorrect() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[4]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("contacts")).isDisplayed());
+        assertTrue(driver.findElement(By.id("address")).getText().matches(".*" + "Portas" + ".*"));
+    }
+
 
 
 
