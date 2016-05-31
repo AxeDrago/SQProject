@@ -36,6 +36,16 @@ public class CliftonTest {
         }
     }
 
+    @Test
+    public void testUserStory1Scenario2() throws Exception {
+        driver.get(baseUrl);
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("//h2")).getText(), "Team Name - DCM:");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+
     @AfterClass
     public static void tearDown() throws Exception {
         driver.quit();
