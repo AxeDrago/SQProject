@@ -1,4 +1,5 @@
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -56,6 +57,29 @@ public class DiogoTests {
         driver.findElement(By.xpath("//a/div")).click();
         assertTrue(driver.findElements(By.id("image")).size() != 0);
     }
+
+    @Test
+    public void testPersonalPagePersonNameExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3")).isDisplayed());
+        assertTrue(driver.findElement(By.id("name")).isDisplayed());
+    }
+
+
+
+    @Test
+    public void testPersonalPagePersonNameIsCorrect() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3")).isDisplayed());
+        assertTrue(driver.findElement(By.id("name")).isDisplayed());
+        assertTrue(driver.findElement(By.id("name")).getText().matches("Diogo Lopes"));
+    }
+
+
+
+
 
 
 
