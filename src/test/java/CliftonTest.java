@@ -45,6 +45,21 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
     }
+    @Test
+    public void testUserStory2Scenario2() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//a[2]/div")).click();
+        try {
+            Assert.assertEquals(driver.getTitle(), "Clifton Personal Page - SQ");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MEICM - STUDENT");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
 
     @AfterClass
     public static void tearDown() throws Exception {
