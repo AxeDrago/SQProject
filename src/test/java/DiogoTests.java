@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -16,7 +17,7 @@ import static org.junit.Assert.fail;
  */
 public class DiogoTests {
 
-    private static boolean local = false;
+    private static boolean local = true;
     private static WebDriver driver;
     private static String baseUrl;
     private static StringBuffer verificationErrors = new StringBuffer();
@@ -46,7 +47,17 @@ public class DiogoTests {
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
         assertFalse(driver.getTitle().matches(".*" + "Teste" + ".*"));
+
     }
+
+    @Test
+    public void testPersonalPageImage() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElements(By.id("image")).size() != 0);
+    }
+
+
 
     @AfterClass
     public static void tearDown() throws Exception {
