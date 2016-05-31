@@ -37,21 +37,11 @@ public class MaiaTests{
     }
 
     @Test
-    public void test1() throws Exception {
-        driver.get(baseUrl + "/MaiaPersonal.html");
-        assertEquals("Programming Skills", driver.findElement(By.cssSelector("h3.title.with-icon")).getText());
+    public void testMainPage() throws Exception {
+        driver.get(baseUrl + "/");
+        assertEquals("Rúben Personal Page - SQ", driver.getTitle());
         try {
-            assertEquals("Programming Skills", driver.findElement(By.cssSelector("h3.title.with-icon")).getText());
-        } catch (Error e) {
-            verificationErrors.append(e.toString());
-        }
-        try {
-            assertTrue(isElementPresent(By.cssSelector("h4")));
-        } catch (Error e) {
-            verificationErrors.append(e.toString());
-        }
-        try {
-            assertEquals("Rúben Maia Personal Page", driver.getTitle());
+            assertEquals("Rúben Personal Page - SQ", driver.getTitle());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
