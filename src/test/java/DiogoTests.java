@@ -123,18 +123,29 @@ public class DiogoTests {
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
         assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[4]")).isDisplayed());
-        assertTrue(driver.findElement(By.id("address")).isDisplayed());
+        assertTrue(driver.findElement(By.id("contacts")).isDisplayed());
+        assertTrue(driver.findElement(By.id("mobile")).isDisplayed());
+        assertTrue(driver.findElement(By.id("email")).isDisplayed());
     }
 
 
 
     @Test
-    public void testPersonalPagePersonContactsIsCorrect() throws Exception{
+    public void testPersonalPagePersonContactsMobileIsCorrect() throws Exception{
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
         assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[4]")).isDisplayed());
         assertTrue(driver.findElement(By.id("contacts")).isDisplayed());
-        assertTrue(driver.findElement(By.id("address")).getText().matches(".*" + "Portas" + ".*"));
+        assertTrue(driver.findElement(By.id("mobile")).getText().matches(".*" + "783" + ".*"));
+    }
+
+    @Test
+    public void testPersonalPagePersonContactsEmailIsCorrect() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[4]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("contacts")).isDisplayed());
+        assertTrue(driver.findElement(By.id("email")).getText().matches(".*" + "@" + ".* ||" + ".*" + "@" + ".*"));
     }
 
 
