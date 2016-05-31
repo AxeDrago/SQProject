@@ -31,7 +31,7 @@ public class CliftonTest {
     @Test
     public void testCliftonTest() throws  Exception  {
         driver.get(baseUrl);
-        driver.findElement(By.xpath("//a[contains(text(),'Clifton Clunie - Personal Page')]")).click();
+        driver.findElement(By.xpath("//div[@id='cliftonContent']/img")).click();
         Assert.assertEquals("Clifton Personal Page - SQ", driver.getTitle());
         try {
             Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(), "MEICM - STUDENT");

@@ -22,7 +22,7 @@ h1{
 }
 #description_wrapper h3, p {
    /*display: inline-block; */
-    line-height: 50%;
+    line-height: 30%;
     vertical-align: top;
 
 }
