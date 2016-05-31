@@ -7,11 +7,17 @@ body {
     height: 250px;
     display: inline-block;
 }
+
 #diogoContent{
     display: inline-block;
     text-align: center;
 }
 #cliftonContent{
+    display: inline-block;
+    text-align: center;
+}
+
+#maiaContent{
     display: inline-block;
     text-align: center;
 }
