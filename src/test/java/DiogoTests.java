@@ -79,6 +79,26 @@ public class DiogoTests {
 
 
 
+    @Test
+    public void testPersonalPagePersonCountryExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[2]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("country")).isDisplayed());
+    }
+
+
+
+    @Test
+    public void testPersonalPagePersonCountryIsCorrect() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[2]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("country")).isDisplayed());
+        assertTrue(driver.findElement(By.id("country")).getText().matches("Portugal"));
+    }
+
+
 
 
 
