@@ -39,9 +39,37 @@ public class MaiaTests{
     @Test
     public void testMainPage() throws Exception {
         driver.get(baseUrl + "/");
+        assertEquals("SQ Project Pipeline", driver.getTitle());
+        try {
+            assertEquals("SQ Project Pipeline", driver.getTitle());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+
+    @Test
+    public void testEstruturaPersonal() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
         assertEquals("Rúben Personal Page - SQ", driver.getTitle());
         try {
             assertEquals("Rúben Personal Page - SQ", driver.getTitle());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Rúben Personal Page - SQ".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertEquals("MEICM - STUDENT", driver.findElement(By.cssSelector("h1")).getText());
+        try {
+            assertEquals("MEICM - STUDENT", driver.findElement(By.cssSelector("h1")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("h1")));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
