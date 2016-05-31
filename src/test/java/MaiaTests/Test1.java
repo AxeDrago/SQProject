@@ -12,6 +12,7 @@ import org.openqa.selenium.*;
 
 import static org.junit.Assert.fail;
 
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.regex.Pattern;
@@ -37,12 +38,15 @@ public class Test1 {
 
     @Test
     public void test1() throws Exception {
-        driver.get(baseUrl + "/");
-        driver.findElement(By.linkText("Rúben Maia Personal Page")).click();
-        assertEquals("Isto será um titulo", driver.findElement(By.cssSelector("h1")).getText());
-        assertEquals("Rúben Maia Personal Page", driver.getTitle());
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        assertEquals("Programming Skills", driver.findElement(By.cssSelector("h3.title.with-icon")).getText());
         try {
-            assertEquals("Isto será um titulo", driver.findElement(By.cssSelector("h1")).getText());
+            assertEquals("Programming Skills", driver.findElement(By.cssSelector("h3.title.with-icon")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("h4")));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
@@ -95,4 +99,3 @@ public class Test1 {
         }
     }
 }
-
