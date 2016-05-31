@@ -7,6 +7,11 @@ body {
     height: 250px;
     display: inline-block;
 }
+.content{
+    display: inline-block;
+    text-align: center;
+}
+/*
 #diogoContent{
     display: inline-block;
     text-align: center;
@@ -14,4 +19,4 @@ body {
 #cliftonContent{
     display: inline-block;
     text-align: center;
-}
+}*/
