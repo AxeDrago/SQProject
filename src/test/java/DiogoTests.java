@@ -90,13 +90,35 @@ public class DiogoTests {
 
 
     @Test
-    public void testPersonalPagePersonCountryIsCorrect() throws Exception{
+    public void testPersonalPagePersonCountryIsCorrect() throws Exception {
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
         assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[2]")).isDisplayed());
         assertTrue(driver.findElement(By.id("country")).isDisplayed());
         assertTrue(driver.findElement(By.id("country")).getText().matches("Portugal"));
     }
+
+    @Test
+    public void testPersonalPagePersonAddressExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[3]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("address")).isDisplayed());
+    }
+
+
+
+    @Test
+    public void testPersonalPagePersonAddressIsCorrect() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[3]")).isDisplayed());
+        assertTrue(driver.findElement(By.id("address")).isDisplayed());
+        assertTrue(driver.findElement(By.id("address")).getText().matches(".*" + "Portas" + ".*"));
+    }
+
+
+
 
 
 
