@@ -94,6 +94,42 @@ public class MaiaTests{
     }
 
     @Test
+    public void testFooter() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Rúben Maia Personal Page".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.cssSelector("div.footer")));
+        try {
+            assertTrue(isElementPresent(By.cssSelector("div.col-md-12")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertEquals("Copyright © 2016 Team DCM - All rights reserved.", driver.findElement(By.cssSelector("div.col-md-12")).getText());
+        try {
+            assertEquals("Copyright © 2016 Team DCM - All rights reserved.", driver.findElement(By.cssSelector("div.col-md-12")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Copyright © 2016 Team DCM - All rights reserved.".equals(driver.findElement(By.cssSelector("div.col-md-12")).getText())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if (isElementPresent(By.cssSelector("div.col-md-12"))) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+    }
+
+
+    @Test
     public void testSocialTests() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
         for (int second = 0;; second++) {
