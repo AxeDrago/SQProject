@@ -49,6 +49,35 @@ public class MaiaTests{
     }
 
     @Test
+    public void testHeaderStructure() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Rúben Personal Page - SQ".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.id("name")));
+        assertTrue(isElementPresent(By.id("profession")));
+        assertTrue(isElementPresent(By.id("country")));
+        try {
+            assertTrue(isElementPresent(By.id("name")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.id("profession")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.id("country")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+
+    @Test
     public void testPersonal() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
         assertEquals("Rúben Personal Page - SQ", driver.getTitle());
@@ -62,21 +91,9 @@ public class MaiaTests{
             try { if ("Rúben Personal Page - SQ".equals(driver.getTitle())) break; } catch (Exception e) {}
             Thread.sleep(1000);
         }
-
-        assertEquals("MEICM - STUDENT", driver.findElement(By.cssSelector("h1")).getText());
-        try {
-            assertEquals("MEICM - STUDENT", driver.findElement(By.cssSelector("h1")).getText());
-        } catch (Error e) {
-            verificationErrors.append(e.toString());
-        }
-        try {
-            assertTrue(isElementPresent(By.cssSelector("h1")));
-        } catch (Error e) {
-            verificationErrors.append(e.toString());
-        }
     }
 
-    @Test
+    /*@Test
     public void testPersonalStructure() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
         assertEquals("Name:", driver.findElement(By.cssSelector("h3")).getText());
@@ -247,7 +264,7 @@ public class MaiaTests{
             Thread.sleep(1000);
         }
 
-    }
+    }*/
 
     @After
     public void tearDown() throws Exception {
