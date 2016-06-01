@@ -32,8 +32,8 @@ public class MaiaTests{
     @Before
     public void setUp() throws Exception {
         driver = new HtmlUnitDriver();
-        baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
-        //baseUrl = "http://127.0.0.1:8080";
+        //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
+        baseUrl = "http://127.0.0.1:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -53,7 +53,7 @@ public class MaiaTests{
         driver.get(baseUrl + "/MaiaPersonal.html");
         for (int second = 0;; second++) {
             if (second >= 60) fail("timeout");
-            try { if ("Rúben Personal Page - SQ".equals(driver.getTitle())) break; } catch (Exception e) {}
+            try { if ("Rúben Maia Personal Page".equals(driver.getTitle())) break; } catch (Exception e) {}
             Thread.sleep(1000);
         }
 
@@ -80,16 +80,51 @@ public class MaiaTests{
     @Test
     public void testPersonal() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
-        assertEquals("Rúben Personal Page - SQ", driver.getTitle());
+        assertEquals("Rúben Maia Personal Page", driver.getTitle());
         try {
-            assertEquals("Rúben Personal Page - SQ", driver.getTitle());
+            assertEquals("Rúben Maia Personal Page", driver.getTitle());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         for (int second = 0;; second++) {
             if (second >= 60) fail("timeout");
-            try { if ("Rúben Personal Page - SQ".equals(driver.getTitle())) break; } catch (Exception e) {}
+            try { if ("Rúben Maia Personal Page".equals(driver.getTitle())) break; } catch (Exception e) {}
             Thread.sleep(1000);
+        }
+    }
+
+    @Test
+    public void testSocialTests() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Rúben Maia Personal Page".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.xpath("//p[@id='email']/i")));
+        assertTrue(isElementPresent(By.xpath("//p[@id='github']/i")));
+        assertEquals("", driver.findElement(By.xpath("//p[@id='linkedin']/i")).getText());
+        assertTrue(isElementPresent(By.xpath("//p[@id='twitter']/i")));
+        try {
+            assertTrue(isElementPresent(By.xpath("//p[@id='email']/i")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//p[@id='github']/i")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//p[@id='linkedin']/i")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//p[@id='twitter']/i")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
         }
     }
 
