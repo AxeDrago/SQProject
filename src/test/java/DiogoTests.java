@@ -1,4 +1,3 @@
-import org.apache.xpath.operations.String;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
