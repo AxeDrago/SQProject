@@ -52,6 +52,9 @@ public class DiogoTests {
 
     }
 
+
+    /*First Page Tests!!!!
+
     @Test
     public void testPersonalPageImage() throws Exception{
         driver.get(baseUrl + "/");
@@ -205,7 +208,7 @@ public class DiogoTests {
         assertTrue(driver.findElement(By.id("socialM")).isDisplayed());
         driver.findElement(By.xpath("//a[contains(text(),'LinkedIn')]")).click();
         assertTrue("" + driver.getTitle() ,driver.getTitle().matches(".*" + "LinkedIn" + ".*" ));
-    }*/
+    }
 
     @Test
     public void testPersonalPagePersonSocialMediaTwitterIsWorking() throws Exception{
@@ -215,6 +218,43 @@ public class DiogoTests {
         assertTrue(driver.findElement(By.id("socialM")).isDisplayed());
         driver.findElement(By.xpath("//a[contains(text(),'Twitter')]")).click();
         assertTrue(driver.getTitle().matches(".*"+ "@DBernardoL" + ".*" + "Twitter" + ".*" ));
+    }*/
+
+
+    /*
+    *Second Page Tests
+    * */
+
+
+    @Test
+    public void testPersonalPageImage() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue(driver.findElements(By.xpath("//img[@alt='profile image']")).size() != 0);
+    }
+
+    @Test
+    public void testPersonalPageNameExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element name isn't show",driver.findElement(By.xpath("//h3[@id='name']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//h3[@id='name']")).getText() + "Doesn't match Diogo" ,driver.findElement(By.xpath("//h3[@id='name']")).getText().matches(".*"+ "Diogo" + ".*"));
+    }
+
+    @Test
+    public void testPersonalPageProfessionExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element profession isn't show",driver.findElement(By.xpath("//p[@id='profession']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='profession']")).getText() + "Doesn't match Software" ,driver.findElement(By.xpath("//p[@id='profession']")).getText().matches(".*"+ "Software" + ".*"));
+    }
+
+    @Test
+    public void testPersonalPageCountryExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for country isn't show",driver.findElement(By.xpath("//p[2]")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[2]")).getText() + "Doesn't match Portugal" ,driver.findElement(By.xpath("//p[2]")).getText().matches(".*"+ "Portugal" + ".*"));
     }
 
 
