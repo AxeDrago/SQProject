@@ -197,7 +197,7 @@ public class DiogoTests {
         assertTrue(driver.getTitle().matches(".*"+"Diogo" + ".*" + "Bernardo" + ".*" + "Facebook" + ".*" ));
     }
 
-    @Test
+    /*@Test
     public void testPersonalPagePersonSocialMediaLinkedInIsWorking() throws Exception{
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
@@ -205,7 +205,7 @@ public class DiogoTests {
         assertTrue(driver.findElement(By.id("socialM")).isDisplayed());
         driver.findElement(By.xpath("//a[contains(text(),'LinkedIn')]")).click();
         assertTrue("" + driver.getTitle() ,driver.getTitle().matches(".*" + "LinkedIn" + ".*" ));
-    }
+    }*/
 
     @Test
     public void testPersonalPagePersonSocialMediaTwitterIsWorking() throws Exception{
