@@ -204,7 +204,7 @@ public class DiogoTests {
         assertTrue(driver.findElement(By.xpath("//div[@id='description_wrapper']/h3[7]")).isDisplayed());
         assertTrue(driver.findElement(By.id("socialM")).isDisplayed());
         driver.findElement(By.xpath("//a[contains(text(),'LinkedIn')]")).click();
-        assertFalse(driver.getTitle().matches(".*" + "LinkedIn" + ".*" ));
+        assertTrue("" + driver.getTitle() ,driver.getTitle().matches(".*" + "LinkedIn" + ".*" ));
     }
 
     @Test
