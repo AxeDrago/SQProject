@@ -153,6 +153,41 @@ public class MaiaTests{
         driver.findElement(By.linkText("@ruben_maia")).click();
     }
 
+    @Test
+    public void testSectionHeaders() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Rúben Maia Personal Page".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.id("work_history")));
+        try {
+            assertTrue(isElementPresent(By.id("work_history")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertTrue(isElementPresent(By.id("edu_history")));
+        try {
+            assertTrue(isElementPresent(By.id("edu_history")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertTrue(isElementPresent(By.id("skills")));
+        try {
+            assertTrue(isElementPresent(By.id("skills")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertTrue(isElementPresent(By.id("languages")));
+        try {
+            assertTrue(isElementPresent(By.id("languages")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+
     /*@Test
     public void testPersonalStructure() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
