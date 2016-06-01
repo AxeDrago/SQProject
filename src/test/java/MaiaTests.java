@@ -128,6 +128,31 @@ public class MaiaTests{
         }
     }
 
+    @Test
+    public void testLinks() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        try {
+            assertEquals("linkedin.com/in/rubenmaia", driver.findElement(By.linkText("linkedin.com/in/rubenmaia")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        driver.findElement(By.linkText("linkedin.com/in/rubenmaia")).click();
+        driver.get("http://127.0.0.1:8080/MaiaPersonal.html");
+        try {
+            assertEquals("@rbnmaia", driver.findElement(By.linkText("@rbnmaia")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        driver.findElement(By.linkText("@rbnmaia")).click();
+        driver.get("http://127.0.0.1:8080/MaiaPersonal.html");
+        try {
+            assertEquals("@ruben_maia", driver.findElement(By.linkText("@ruben_maia")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        driver.findElement(By.linkText("@ruben_maia")).click();
+    }
+
     /*@Test
     public void testPersonalStructure() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
