@@ -8,6 +8,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.fail;
 
 public class CliftonTest {
@@ -105,6 +106,13 @@ public class CliftonTest {
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
+    }
+    @Test
+    public void ImageVerification() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//a[2]/div")).click();
+        assertTrue(driver.findElement(By.xpath("/html/body/div[1]/div[1]/img")).isDisplayed());
+
     }
 
     @AfterClass

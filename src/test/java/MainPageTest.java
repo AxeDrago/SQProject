@@ -1,3 +1,4 @@
+import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,14 @@ public class MainPageTest {
             verificationErrors.append(e.toString());
         }
     }
+    @Test
+    public void ImageVerification() throws Exception {
+        driver.get(baseUrl);
+        TestCase.assertTrue(driver.findElement(By.xpath("/html/body/div/a[1]/div/img")).isDisplayed());
+        TestCase.assertTrue(driver.findElement(By.xpath("/html/body/div/a[2]/div/img")).isDisplayed());
+        TestCase.assertTrue(driver.findElement(By.xpath("/html/body/div/a[3]/div/img")).isDisplayed());
 
+    }
     @org.junit.After
     public void tearDown() throws Exception {
         driver.quit();
