@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clifton Personal Page - SQ</title>
+    <link rel="stylesheet" href="css/cliftonstyle.css">
+    </head>
+<body>
+<h1>MEICM - STUDENT</h1>
+<div id = mainInfo>
+     <div id="image_container">
+        <img id="image" src="images/IMG_20150919_100311.jpg" alt="Clifton Clunie - Nazare">
+    </div>
+    <div id = "description">
+        <div id= "description_wrapper">
+            <h3> Name: </h3><p id="name"></p>
+            <h3> Country: </h3><p id="country"></p>
+            <h3> Address: </h3><p id="address"></p>
+            <h3> Contacts: </h3><p id="contacts"></p>
+            <h3> CV: </h3><p id="cv"></p>
+            <h3> Skills: </h3><p id="skills"></p>
+            <h3> Social Media Link:</h3><p id="socialM"></p>
+            <h3> Professional Experience: </h3><p id="profExp"></p>
+        </div>
+      <script type="text/javascript" src="javascript/functions/functionScripts.js"></script>
+      <script src="javascript/json/memberPageScripts.js"></script>
+    </div>
+</div>
+    <div id="form">
+        <h2>Comments</h2>
+        <label for="nameComment">Name:</label><input type="text" name="name" id="nameComment" /><br />
+        <label for ="emailComment">Email:</label> <input type="text" name="email" id="emailComment" /><br />
+        <label for="commentComment">Comment:</label><br />
+        <textarea name="comment" id="commentComment"></textarea><br />
+        <input type="hidden"  id="articleId" value=' ' />
+        <input type="submit" value="Submit" />
+
+    </div>
+
+</body>
+</html>
