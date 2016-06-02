@@ -38,6 +38,17 @@ public class CliftonTest {
         }
     }
 
+    @Test
+    public void testVerifMainInfo() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/h3")).getText(),"Clifton Clunie");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+
 /*
     @Test
     public void testCliftonTest() throws Exception {
