@@ -223,6 +223,140 @@ public class MaiaTests{
             verificationErrors.append(e.toString());
         }
     }
+    @Test
+    public void testNnn() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        assertTrue(isElementPresent(By.cssSelector("div.timeline-badge.info")));
+        assertEquals("2010", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
+        assertTrue(isElementPresent(By.cssSelector("h4.timeline-title")));
+        assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.cssSelector("h4.timeline-title")).getText());
+        assertTrue(isElementPresent(By.cssSelector("small.text-muted")));
+        assertEquals("Technical Support", driver.findElement(By.cssSelector("small.text-muted")).getText());
+        assertTrue(isElementPresent(By.xpath("//p[2]/small")));
+        assertEquals("(January 2010 - April 2010) | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
+        assertTrue(isElementPresent(By.cssSelector("div.timeline-body > p")));
+        assertEquals("DEI - Technical support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
+        try {
+            assertTrue(isElementPresent(By.cssSelector("div.timeline-badge.info")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("2010", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("h4.timeline-title")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.cssSelector("h4.timeline-title")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("small.text-muted")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Technical Support", driver.findElement(By.cssSelector("small.text-muted")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//p[2]/small")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("(January 2010 - April 2010) | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("div.timeline-body > p")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("DEI - Technical support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+    @Test
+    public void testEducationSegment() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if (isElementPresent(By.id("edu_history"))) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div")));
+        assertEquals("2010", driver.findElement(By.xpath("//ul[2]/li/div")).getText());
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/h4")));
+        assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/h4")).getText());
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p/small")));
+        assertEquals("BSc., Computer Engineering", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/p/small")).getText());
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p[2]/small")));
+        assertEquals("2010-2015 | Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/p[2]/small")).getText());
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div[2]/p")));
+        assertEquals("Bachelor Degree", driver.findElement(By.xpath("//ul[2]/li/div[2]/div[2]/p")).getText());
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("2010", driver.findElement(By.xpath("//ul[2]/li/div")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/h4")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/h4")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p/small")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("BSc., Computer Engineering", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/p/small")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p[2]/small")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("2010-2015 | Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/p[2]/small")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div[2]/p")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Bachelor Degree", driver.findElement(By.xpath("//ul[2]/li/div[2]/div[2]/p")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
 
     /*@Test
     public void testPersonalStructure() throws Exception {
