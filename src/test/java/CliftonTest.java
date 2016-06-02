@@ -47,7 +47,19 @@ public class CliftonTest {
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[1]")).getText(),"Computer System Engineer");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[2]")).getText(),"Panama, Panama");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
     }
+
+
 
 /*
     @Test
