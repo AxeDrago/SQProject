@@ -21,8 +21,8 @@ public class CliftonTest {
     public static void setUp() throws Exception {
        //driver = new FirefoxDriver();
        driver = new HtmlUnitDriver();
-       baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
-       //baseUrl = "http://127.0.0.1:8080";
+       //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
+       baseUrl = "http://127.0.0.1:8080";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -39,7 +39,7 @@ public class CliftonTest {
     }
 
     @Test
-    public void testVerifMainInfo() throws Exception {
+    public void testVerifyMainInfo() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
@@ -54,6 +54,27 @@ public class CliftonTest {
         }
         try {
             Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[2]")).getText(),"Panama, Panama");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+
+    @Test
+    public void contactInformation() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+       try {
+            Assert.assertEquals(driver.findElement(By.xpath("//div[2]/p")).getText(), "clifton.clunie26@gmail.com");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[2]")).getText(), "@clifton26");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[3]")).getText(), "@titon26");
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
