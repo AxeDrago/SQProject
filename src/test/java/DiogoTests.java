@@ -277,6 +277,7 @@ public class DiogoTests {
     @Test
     public void testPersonalPageLinkGithubWorks() throws Exception{
 
+        String firstTab = driver.getWindowHandle();
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
@@ -287,13 +288,25 @@ public class DiogoTests {
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
-        driver.switchTo().window(tabs.get(0));
+        if(firstTab == tabs.get(0)){
+            driver.switchTo().window(tabs.get(1));
 
 
-        assertTrue( "Expected: AxeDrago (Diogo Lopes) || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "AxeDrago" + ".*"));
+            assertTrue( "Expected: AxeDrago (Diogo Lopes) || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "AxeDrago" + ".*"));
 
-        driver.close();
-        driver.switchTo().window(tabs.get(1));
+            driver.close();
+            driver.switchTo().window(tabs.get(0));
+        }else{
+
+            driver.switchTo().window(tabs.get(0));
+
+            assertTrue( "Expected: AxeDrago (Diogo Lopes) || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "AxeDrago" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(1));
+        }
+
+
     }
 
     @Test
@@ -309,6 +322,7 @@ public class DiogoTests {
     @Test
     public void testPersonalPageLinkTwitterWorks() throws Exception{
 
+        String firstTab = driver.getWindowHandle();
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
@@ -319,12 +333,23 @@ public class DiogoTests {
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
-        driver.switchTo().window(tabs.get(1));
+        if(tabs.get(0) == firstTab){
+            driver.switchTo().window(tabs.get(1));
 
-        assertTrue( "Expected: @DBernardoL || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "@DBernardoL" + ".*"));
+            assertTrue( "Expected: @DBernardoL || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "@DBernardoL" + ".*"));
 
-        driver.close();
-        driver.switchTo().window(tabs.get(0));
+            driver.close();
+            driver.switchTo().window(tabs.get(0));
+        }else{
+            driver.switchTo().window(tabs.get(0));
+
+            assertTrue( "Expected: @DBernardoL || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "@DBernardoL" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(1));
+        }
+
+
     }
 
     @Test
@@ -340,6 +365,7 @@ public class DiogoTests {
     @Test
     public void testPersonalPageLinkCVWorks() throws Exception {
 
+        String firstTab = driver.getWindowHandle();
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
@@ -350,13 +376,21 @@ public class DiogoTests {
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
-        driver.switchTo().window(tabs.get(1));
+        if(tabs.get(0) == firstTab){
+            driver.switchTo().window(tabs.get(1));
 
+            assertTrue("Expected: MEGA || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
 
-        assertTrue("Expected: MEGA || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
+            driver.close();
+            driver.switchTo().window(tabs.get(0));
+        }else {
+            driver.switchTo().window(tabs.get(0));
 
-        driver.close();
-        driver.switchTo().window(tabs.get(0));
+            assertTrue("Expected: MEGA || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(1));
+        }
 
     }
 
