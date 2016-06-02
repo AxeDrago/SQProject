@@ -21,8 +21,8 @@ public class CliftonTest {
     public static void setUp() throws Exception {
        //driver = new FirefoxDriver();
        driver = new HtmlUnitDriver();
-       //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
-       baseUrl = "http://127.0.0.1:8080";
+       baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
+       //baseUrl = "http://127.0.0.1:8080";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -63,7 +63,7 @@ public class CliftonTest {
     public void contactInformation() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
-       try {
+        try {
             Assert.assertEquals(driver.findElement(By.xpath("//div[2]/p")).getText(), "clifton.clunie26@gmail.com");
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -78,7 +78,17 @@ public class CliftonTest {
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
+
     }
+
+    @Test
+    public void contactInformationLink() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+        driver.findElement(By.linkText("@clifton26")).click();
+        driver.findElement(By.linkText("@titon26")).click();
+    }
+
 
 
 
