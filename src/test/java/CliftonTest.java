@@ -22,11 +22,24 @@ public class CliftonTest {
     public static void setUp() throws Exception {
        //driver = new FirefoxDriver();
        driver = new HtmlUnitDriver();
-       baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
-       //baseUrl = "http://127.0.0.1:8080";
+       //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
+       baseUrl = "http://127.0.0.1:8080";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+
+    @Test
+    public void testVerifyTitleNewLayout() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+        try {
+            Assert.assertEquals(driver.getTitle(), "Clifton Clunie Personal Page");
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+
+/*
     @Test
     public void testCliftonTest() throws Exception {
         driver.get(baseUrl);
@@ -108,13 +121,20 @@ public class CliftonTest {
         }
     }
     @Test
-    public void ImageVerification() throws Exception {
+    public void imageVerification() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//a[2]/div")).click();
         assertTrue(driver.findElement(By.xpath("/html/body/div[1]/div[1]/img")).isDisplayed());
 
     }
 
+    @Test
+    public void cssVerification() throws Exception {
+        driver.get(baseUrl);
+        //driver.findElement(By.xpath("//a[2]/div")).click();
+        //System.out.print(driver.findElement(By.cssSelector("css=h1")).getCssValue("display"));
+    }
+*/
     @AfterClass
     public static void tearDown() throws Exception {
         driver.quit();
