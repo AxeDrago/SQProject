@@ -353,7 +353,7 @@ public class DiogoTests {
         driver.switchTo().window(tabs.get(1));
 
 
-        assertTrue("Expected: CV || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
+        assertTrue("Expected: MEGA || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
 
         driver.close();
         driver.switchTo().window(tabs.get(0));
