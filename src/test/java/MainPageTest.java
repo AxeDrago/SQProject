@@ -26,8 +26,8 @@ public class MainPageTest {
     @org.junit.Before
     public void setUp() throws Exception {
         driver = new HtmlUnitDriver();
-        baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
-        //baseUrl = "http://127.0.0.1";
+        //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
+        baseUrl = "http://127.0.0.1:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -42,25 +42,122 @@ public class MainPageTest {
         }
     }
     @Test
+    public void testHeader() throws Exception {
+        driver.get(baseUrl + "/");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("SQ Project Pipeline".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.id("intro")));
+        assertEquals("SQ Project Group - Continuos Integration with Jenkins", driver.findElement(By.id("intro")).getText());
+        try {
+            assertEquals("SQ Project Group - Continuos Integration with Jenkins", driver.findElement(By.id("intro")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.id("intro")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertTrue(isElementPresent(By.id("team")));
+        assertEquals("Team DCM", driver.findElement(By.id("team")).getText());
+        try {
+            assertEquals("Team DCM", driver.findElement(By.id("team")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.id("team")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertTrue(isElementPresent(By.id("country")));
+        assertEquals("Leiria, Portugal", driver.findElement(By.id("country")).getText());
+        try {
+            assertEquals("Leiria, Portugal", driver.findElement(By.id("country")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.id("country")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+    /*
+    @Test
     public void ImageVerification() throws Exception {
         driver.get(baseUrl);
         TestCase.assertTrue(driver.findElement(By.xpath("/html/body/div/a[1]/div/img")).isDisplayed());
         TestCase.assertTrue(driver.findElement(By.xpath("/html/body/div/a[2]/div/img")).isDisplayed());
         TestCase.assertTrue(driver.findElement(By.xpath("/html/body/div/a[3]/div/img")).isDisplayed());
 
+    }*/
+    @Test
+    public void ImageVerification() throws Exception {
+        driver.get(baseUrl + "/");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("SQ Project Pipeline".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.cssSelector("img[alt=\"profile image\"]")));
+        try {
+            assertTrue(isElementPresent(By.cssSelector("img[alt=\"profile image\"]")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertTrue(isElementPresent(By.cssSelector("img[alt=\"Clifton Image\"]")));
+        try {
+            assertTrue(isElementPresent(By.cssSelector("img[alt=\"Clifton Image\"]")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertTrue(isElementPresent(By.cssSelector("img[alt=\"Ruben Image\"]")));
+        try {
+            assertTrue(isElementPresent(By.cssSelector("img[alt=\"Ruben Image\"]")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
     }
     @Test
-    public void Projects() throws Exception {
+    public void ProjectsHeader() throws Exception{
         driver.get(baseUrl + "/");
-        assertEquals("Projects", driver.findElement(By.cssSelector("h3")).getText());
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("SQ Project Pipeline".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.id("projects")));
+        assertEquals("Team Projects", driver.findElement(By.id("projects")).getText());
         try {
-            assertEquals("Projects", driver.findElement(By.cssSelector("h3")).getText());
+            assertEquals("Team Projects", driver.findElement(By.id("projects")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.id("projects")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+    @Test
+    public void testTeamProjects() throws Exception {
+        driver.get(baseUrl + "/");
+        assertEquals("Team Projects", driver.findElement(By.id("projects")).getText());
+        try {
+            assertEquals("Team Projects", driver.findElement(By.id("projects")).getText());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         for (int second = 0;; second++) {
             if (second >= 60) fail("timeout");
-            try { if ("Projects".equals(driver.findElement(By.cssSelector("h3")).getText())) break; } catch (Exception e) {}
+            try { if ("Team Projects".equals(driver.findElement(By.cssSelector("h3")).getText())) break; } catch (Exception e) {}
             Thread.sleep(1000);
         }
 
@@ -85,6 +182,40 @@ public class MainPageTest {
         for (int second = 0;; second++) {
             if (second >= 60) fail("timeout");
             try { if ("Context Awareness Systems".equals(driver.findElement(By.xpath("//li[2]")).getText())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+    }
+    @Test
+    public void testFooter() throws Exception {
+        driver.get(baseUrl + "/");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("SQ Project Pipeline".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.cssSelector("div.footer")));
+        try {
+            assertTrue(isElementPresent(By.cssSelector("div.col-md-12")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertEquals("Copyright © 2016 Team DCM - All rights reserved.", driver.findElement(By.cssSelector("div.col-md-12")).getText());
+        try {
+            assertEquals("Copyright © 2016 Team DCM - All rights reserved.", driver.findElement(By.cssSelector("div.col-md-12")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Copyright © 2016 Team DCM - All rights reserved.".equals(driver.findElement(By.cssSelector("div.col-md-12")).getText())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if (isElementPresent(By.cssSelector("div.col-md-12"))) break; } catch (Exception e) {}
             Thread.sleep(1000);
         }
 

@@ -68,6 +68,40 @@ hr {
     padding: 11px;
 }
 
+.photoAlignment{
+     width: 300px;
+     height: 250px;
+     display: inline-block;
+     text-align: center;
+}
+
+.team {
+    display: inline-block;
+}
+
+.container {
+    float:left;
+        position: relative;
+        width: 30%;
+}
+
+.photo img {
+    width: 100%;
+    height: 3.5in;
+ }
+
+.photo {
+    float:left;
+}
+
+.identifier {
+    width: 40%;
+    position: center;
+    bottom: 0; left: 0;
+}
+
+
+
 .header li {
     list-style-type: none;
     padding: 4px 0;
