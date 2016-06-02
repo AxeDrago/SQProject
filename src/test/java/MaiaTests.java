@@ -224,7 +224,7 @@ public class MaiaTests{
         }
     }
     @Test
-    public void testNnn() throws Exception {
+    public void testEducationStructure() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
         assertTrue(isElementPresent(By.cssSelector("div.timeline-badge.info")));
         assertEquals("2010", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
@@ -233,7 +233,7 @@ public class MaiaTests{
         assertTrue(isElementPresent(By.cssSelector("small.text-muted")));
         assertEquals("Technical Support", driver.findElement(By.cssSelector("small.text-muted")).getText());
         assertTrue(isElementPresent(By.xpath("//p[2]/small")));
-        assertEquals("(January 2010 - April 2010) | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
+        assertEquals("January 2010 - April 2010 | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
         assertTrue(isElementPresent(By.cssSelector("div.timeline-body > p")));
         assertEquals("DEI - Technical support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
         try {
@@ -272,7 +272,7 @@ public class MaiaTests{
             verificationErrors.append(e.toString());
         }
         try {
-            assertEquals("(January 2010 - April 2010) | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
+            assertEquals("January 2010 - April 2010 | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
