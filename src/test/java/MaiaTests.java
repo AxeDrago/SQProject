@@ -32,8 +32,8 @@ public class MaiaTests{
     @Before
     public void setUp() throws Exception {
         driver = new HtmlUnitDriver();
-        //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
-        baseUrl = "http://127.0.0.1:8080";
+        baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
+        //baseUrl = "http://127.0.0.1:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -283,6 +283,76 @@ public class MaiaTests{
         }
         try {
             assertEquals("DEI - Technical support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+    @Test
+    public void testEducationSegment() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if (isElementPresent(By.id("edu_history"))) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div")));
+        assertEquals("2010", driver.findElement(By.xpath("//ul[2]/li/div")).getText());
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/h4")));
+        assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/h4")).getText());
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p/small")));
+        assertEquals("BSc., Computer Engineering", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/p/small")).getText());
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p[2]/small")));
+        assertEquals("2010-2015 | Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/p[2]/small")).getText());
+        assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div[2]/p")));
+        assertEquals("Bachelor Degree", driver.findElement(By.xpath("//ul[2]/li/div[2]/div[2]/p")).getText());
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("2010", driver.findElement(By.xpath("//ul[2]/li/div")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/h4")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/h4")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p/small")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("BSc., Computer Engineering", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/p/small")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p[2]/small")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("2010-2015 | Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/p[2]/small")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div[2]/p")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Bachelor Degree", driver.findElement(By.xpath("//ul[2]/li/div[2]/div[2]/p")).getText());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
