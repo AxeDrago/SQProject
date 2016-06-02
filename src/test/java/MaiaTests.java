@@ -32,8 +32,8 @@ public class MaiaTests{
     @Before
     public void setUp() throws Exception {
         driver = new HtmlUnitDriver();
-        baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
-        //baseUrl = "http://127.0.0.1:8080";
+        //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
+        baseUrl = "http://127.0.0.1:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -219,6 +219,70 @@ public class MaiaTests{
         assertTrue(isElementPresent(By.id("languages")));
         try {
             assertTrue(isElementPresent(By.id("languages")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+    @Test
+    public void testNnn() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        assertTrue(isElementPresent(By.cssSelector("div.timeline-badge.info")));
+        assertEquals("2010", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
+        assertTrue(isElementPresent(By.cssSelector("h4.timeline-title")));
+        assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.cssSelector("h4.timeline-title")).getText());
+        assertTrue(isElementPresent(By.cssSelector("small.text-muted")));
+        assertEquals("Technical Support", driver.findElement(By.cssSelector("small.text-muted")).getText());
+        assertTrue(isElementPresent(By.xpath("//p[2]/small")));
+        assertEquals("(January 2010 - April 2010) | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
+        assertTrue(isElementPresent(By.cssSelector("div.timeline-body > p")));
+        assertEquals("DEI - Technical support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
+        try {
+            assertTrue(isElementPresent(By.cssSelector("div.timeline-badge.info")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("2010", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("h4.timeline-title")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.cssSelector("h4.timeline-title")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("small.text-muted")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Technical Support", driver.findElement(By.cssSelector("small.text-muted")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//p[2]/small")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("(January 2010 - April 2010) | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("div.timeline-body > p")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("DEI - Technical support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
