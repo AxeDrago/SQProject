@@ -357,7 +357,54 @@ public class MaiaTests{
             verificationErrors.append(e.toString());
         }
     }
+    @Test
+    public void testProfessionalStructure() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Programming Skills".equals(driver.findElement(By.id("skills")).getText())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
 
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if (isElementPresent(By.cssSelector("div.col-md-4 > div.grid-block"))) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        try {
+            assertTrue(isElementPresent(By.cssSelector("ul.list-unstyled.list-skills > li")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//li[2]")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//li[3]")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.xpath("//li[4]")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertEquals("HTML", driver.findElement(By.cssSelector("span.caption-skill")).getText());
+        assertEquals("100%", driver.findElement(By.cssSelector("div.progress-bar")).getText());
+        assertEquals("100%", driver.findElement(By.cssSelector("div.progress-bar > span")).getText());
+        assertEquals("CSS", driver.findElement(By.xpath("//li[2]/span")).getText());
+        assertEquals("80%", driver.findElement(By.xpath("//li[2]/div/div/span")).getText());
+        assertEquals("80%", driver.findElement(By.xpath("//li[2]/div/div")).getText());
+        assertEquals("PHP", driver.findElement(By.xpath("//li[3]/span")).getText());
+        assertEquals("75%", driver.findElement(By.xpath("//li[3]/div/div")).getText());
+        assertEquals("75%", driver.findElement(By.xpath("//li[3]/div/div/span")).getText());
+        assertEquals("ASP.NET", driver.findElement(By.xpath("//li[4]/span")).getText());
+        assertEquals("90%", driver.findElement(By.xpath("//li[4]/div/div")).getText());
+        assertEquals("90%", driver.findElement(By.xpath("//li[4]/div/div/span")).getText());
+    }
     /*@Test
     public void testPersonalStructure() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
