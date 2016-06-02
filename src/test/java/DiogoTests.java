@@ -352,14 +352,14 @@ public class DiogoTests {
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
-        driver.switchTo().window(tabs.get(1));
+        driver.switchTo().window(tabs.get(0));
 
 
 
         assertTrue( "Expected: MEGA || Reallity: " + driver.getTitle() ,driver.getTitle().matches(".*" + "MEGA" + ".*"));
 
 
-        driver.switchTo().window(tabs.get(0));
+        driver.switchTo().window(tabs.get(1));
     }
 
 
