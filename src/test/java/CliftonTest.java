@@ -86,9 +86,57 @@ public class CliftonTest {
     public void contactInformationLink() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
-
         driver.findElement(By.linkText("@clifton26")).click();
         driver.findElement(By.linkText("@titon26")).click();
+    }
+
+    @Test
+    public void workHistoryTest() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[1]")).getText(), "Work History");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[1]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[1]")).getText(), "2015");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[1]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/h4")).getText(), "Cibernetica S.A");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/h4")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[1]/small")).getText(), "Business Intelligence Analyst");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[1]/small")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), "April 2014 - August 2015 |");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[1]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+            }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), "Panama");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[2]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[2]/p")).getText(), "Development Department");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[2]/p")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+
     }
 
 
