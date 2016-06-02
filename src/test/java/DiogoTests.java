@@ -359,7 +359,7 @@ public class DiogoTests {
         assertTrue( "Expected: MEGA || Reallity: " + driver.getTitle() ,driver.getTitle().matches(".*" + "MEGA" + ".*"));
 
 
-        driver.switchTo().window(tabs.get(0s));
+        driver.switchTo().window(tabs.get(0));
     }
 
 
