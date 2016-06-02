@@ -1,39 +1,13 @@
-body {
-    background-color: lightgrey;
-    font-family:"Calibri";
-}
-
-h1{
-    text-align: center;
-    padding-bottom: 15px;
-}
-
-#image_container{
-    display: inline;
-    padding-right: 10px;
-}
-
-#description_wrapper{
-    float: right;
-}
-#description_wrapper h3, p {
-   /*display: inline-block; */
-    line-height: 30%;
-    vertical-align: top;
-
-}
-
-#description{
-    display: inline-block;
-    vertical-align:top;
-
-}
-#image{
-    width: 400px;
-    height: 350px;
-    padding-left: 10px;
-
-}
-#form{
-
+.header {
+    background-color: #f0f0f0;
+    /*background-image: url(../img/bg-top.jpg); */
+    border-bottom: 1px solid #dddddd;
+    box-shadow: 0 0 3px rgba(190, 190, 190, 0.75);
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    height: auto;
+    padding: 20px 0;
+    margin-bottom: 20px;
 }
