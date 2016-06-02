@@ -21,14 +21,14 @@ public class CliftonTest {
     public static void setUp() throws Exception {
        //driver = new FirefoxDriver();
        driver = new HtmlUnitDriver();
-       baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
-       //baseUrl = "http://127.0.0.1:8080";
+       //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
+       baseUrl = "http://127.0.0.1:8080";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
 
     @Test
-    public void testVerifyTitleNewLayout() throws Exception {
+    public void testVerifyTitleNewLayout2() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
@@ -37,6 +37,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
     }
+
 
     @Test
     public void testVerifyMainInfo() throws Exception {
@@ -85,6 +86,7 @@ public class CliftonTest {
     public void contactInformationLink() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+
         driver.findElement(By.linkText("@clifton26")).click();
         driver.findElement(By.linkText("@titon26")).click();
     }
