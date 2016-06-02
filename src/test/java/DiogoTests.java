@@ -290,9 +290,9 @@ public class DiogoTests {
         driver.switchTo().window(tabs.get(0));
 
 
-        assertTrue( "Expected: AxeDrago (Diogo Lopes) || Reallity: " + driver.getTitle() ,driver.getTitle().matches(".*" + "AxeDrago" + ".*"));
+        assertTrue( "Expected: AxeDrago (Diogo Lopes) || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "AxeDrago" + ".*"));
 
-
+        driver.close();
         driver.switchTo().window(tabs.get(1));
     }
 
@@ -319,11 +319,12 @@ public class DiogoTests {
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
-        driver.switchTo().window(tabs.get(0));
+        driver.switchTo().window(tabs.get(1));
 
         assertTrue( "Expected: @DBernardoL || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "@DBernardoL" + ".*"));
 
-        driver.switchTo().window(tabs.get(1));
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
     }
 
     @Test
@@ -337,26 +338,26 @@ public class DiogoTests {
 
 
     @Test
-    public void testPersonalPageLinkCVWorks() throws Exception{
+    public void testPersonalPageLinkCVWorks() throws Exception {
 
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for LinkedIn isn't show",driver.findElement(By.xpath("//p[@id='cv']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='cv']/a")).getText() + " Doesn't have CV" ,driver.findElement(By.xpath("//p[@id='cv']")).getText().matches(".*" + "CV" + ".*"));
+        assertTrue("Element for LinkedIn isn't show", driver.findElement(By.xpath("//p[@id='cv']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='cv']/a")).getText() + " Doesn't have CV", driver.findElement(By.xpath("//p[@id='cv']")).getText().matches(".*" + "CV" + ".*"));
 
         driver.findElement(By.xpath("//p[@id='cv']/a")).click();
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
+        driver.switchTo().window(tabs.get(1));
+
+
+        assertTrue("Expected: CV || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
+
+        driver.close();
         driver.switchTo().window(tabs.get(0));
 
-
-
-        assertTrue( "Expected: CV || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "MEGA" + ".*"));
-
-
-        driver.switchTo().window(tabs.get(1));
     }
 
 
