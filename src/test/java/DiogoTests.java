@@ -21,7 +21,7 @@ import static org.junit.Assert.fail;
  */
 public class DiogoTests {
 
-    private static boolean local = false;
+    private static boolean local = true;
     private static WebDriver driver;
     private static String baseUrl;
     private static StringBuffer verificationErrors = new StringBuffer();
@@ -413,7 +413,7 @@ public class DiogoTests {
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
         if(driver.findElement(By.xpath("//h3[@id='edu_history']")).isDisplayed()){
-            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() , driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() , 1);
+            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() , 1, driver.findElements(By.xpath("//div[@id='education']/ul/li")).size());
 
         }
     }
@@ -426,7 +426,7 @@ public class DiogoTests {
         driver.findElement(By.xpath("//a/div")).click();
         if(driver.findElement(By.xpath("//h3[@id='edu_history']")).isDisplayed() && driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() == 1 ){
             //Ano Elemento
-            assertEquals("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText() , driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText() , "2012");
+            assertEquals("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText() , "2012", driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText());
             //Instituto
             assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/h4")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/h4")).getText().matches(".*" + "Politécnico" + ".*" + "Leiria" + ".*"));
             //Curso
@@ -439,8 +439,55 @@ public class DiogoTests {
         }
     }
 
+    @Test
+    public void testPersonalPageProgrammingSkillsExists() throws Exception{
 
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Header for programming skills isn't working " + driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).getText() , driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).getText() + " Doesn't match Programming Skills" ,driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).getText().matches("Programming Skills"));
 
+    }
+
+    @Test
+    public void testPersonalPageEducationProgrammingSkillsElementsNumber() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        if(driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).isDisplayed()){
+            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='skillsArea']/div/ul/li")).size() , 5, driver.findElements(By.xpath("//div[@id='skillsArea']/div/ul/li")).size());
+        }
+    }
+
+    @Test
+    public void testPersonalPageProgrammingSkillsInformation() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        if(driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).isDisplayed() && driver.findElements(By.xpath("//div[@id='skillsArea']/div/ul/li")).size() == 5 ){
+            //First Skill
+            assertEquals("Java", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/span")).getText());
+            assertEquals("80%", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/div")).getText());
+            assertEquals("80%", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/div/div/span")).getText());
+            //Second Skill
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/span")).getText().matches(".*" + "HTML" + ".*"));
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div")).getText().matches("70%"));
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div/div/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div/div/span")).getText().matches("70%"));
+            //Third Skill
+            assertEquals("CSS", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/span")).getText());
+            assertEquals("75%" ,driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/div")).getText());
+            assertEquals("75%",driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/div/div/span")).getText());
+            //Fourth Skill
+            assertEquals("PHP", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/span")).getText());
+            assertEquals("65%" ,driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/div")).getText());
+            assertEquals("65%",driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/div/div/span")).getText());
+
+            //Fifth Skill
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/span")).getText().matches(".*" + "mySQL" + ".*"));
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div")).getText().matches("75%"));
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div/div/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div/div/span")).getText().matches("75%"));
+        }
+    }
 
     @AfterClass
     public static void tearDown() throws Exception {
