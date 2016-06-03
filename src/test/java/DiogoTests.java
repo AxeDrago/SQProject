@@ -4,13 +4,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -392,6 +395,48 @@ public class DiogoTests {
             driver.switchTo().window(tabs.get(1));
         }
 
+    }
+
+    @Test
+    public void testPersonalPageEducationHistoryExists() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Header for education history isn't working",driver.findElement(By.xpath("//h3[@id='edu_history']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//h3[@id='edu_history']")).getText() + " Doesn't match education history" ,driver.findElement(By.xpath("//h3[@id='edu_history']")).getText().matches("Education History"));
+
+    }
+
+    @Test
+    public void testPersonalPageEducationHistoryElementsNumber() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        if(driver.findElement(By.xpath("//h3[@id='edu_history']")).isDisplayed()){
+            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() , driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() , 1);
+
+        }
+    }
+
+
+    @Test
+    public void testPersonalPageEducationHistoryElementInformation() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        if(driver.findElement(By.xpath("//h3[@id='edu_history']")).isDisplayed() && driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() == 1 ){
+            //Ano Elemento
+            assertEquals("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText() , driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText() , "2012");
+            //Instituto
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/h4")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/h4")).getText().matches(".*" + "Politécnico" + ".*" + "Leiria" + ".*"));
+            //Curso
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p")).getText().matches(".*" + "Computer Engineering" + ".*"));
+            //Data
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p[2]/small")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p[2]/small")).getText().matches(".*" + "2012" + ".*" + "2015" + ".*" + "Leiria" + ".*"));
+            //Nível
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div[2]/p")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div[2]/p")).getText().matches(".*" + "Bachelor Degree" + ".*"));
+
+        }
     }
 
 
