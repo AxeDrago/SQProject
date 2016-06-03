@@ -32,8 +32,8 @@ public class MaiaTests{
     @Before
     public void setUp() throws Exception {
         driver = new HtmlUnitDriver();
-        baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
-        //baseUrl = "http://127.0.0.1:8080";
+        //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
+        baseUrl = "http://127.0.0.1:8080";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -404,6 +404,47 @@ public class MaiaTests{
         assertEquals("ASP.NET", driver.findElement(By.xpath("//li[4]/span")).getText());
         assertEquals("90%", driver.findElement(By.xpath("//li[4]/div/div")).getText());
         assertEquals("90%", driver.findElement(By.xpath("//li[4]/div/div/span")).getText());
+    }
+    @Test
+    public void testLanguageSkills() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("Language Skills".equals(driver.findElement(By.id("languages")).getText())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if (isElementPresent(By.cssSelector("div.col-md-4 > div.grid-block"))) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        assertTrue(isElementPresent(By.xpath("//div[3]")));
+        assertEquals("NativePortuguese FluentEnglish BasicFrench", driver.findElement(By.xpath("//div[3]")).getText());
+        try {
+            assertEquals("NativePortuguese FluentEnglish BasicFrench", driver.findElement(By.xpath("//div[3]")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertTrue(isElementPresent(By.cssSelector("ul.list-unstyled.list-strip > li")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertEquals("NativePortuguese", driver.findElement(By.cssSelector("ul.list-unstyled.list-strip > li")).getText());
+        try {
+            assertTrue(isElementPresent(By.xpath("//div[3]/ul/li[2]")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertEquals("FluentEnglish", driver.findElement(By.xpath("//div[3]/ul/li[2]")).getText());
+        try {
+            assertTrue(isElementPresent(By.xpath("//div[3]/ul/li[3]")));
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        assertEquals("BasicFrench", driver.findElement(By.xpath("//div[3]/ul/li[3]")).getText());
     }
     /*@Test
     public void testPersonalStructure() throws Exception {
