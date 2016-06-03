@@ -4,11 +4,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.TestCase.assertFalse;
@@ -21,7 +19,7 @@ import static org.junit.Assert.fail;
  */
 public class DiogoTests {
 
-    private static boolean local = false;
+    private static boolean local = true;
     private static WebDriver driver;
     private static String baseUrl;
     private static StringBuffer verificationErrors = new StringBuffer();
@@ -486,6 +484,44 @@ public class DiogoTests {
             assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/span")).getText().matches(".*" + "mySQL" + ".*"));
             assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div")).getText().matches("75%"));
             assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div/div/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div/div/span")).getText().matches("75%"));
+        }
+    }
+
+    @Test
+    public void testPersonalPageLanguageSkillsExists() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Header for language skills isn't working " + driver.findElement(By.xpath("//div[@id='languageArea']/h3")).getText() , driver.findElement(By.xpath("//div[@id='languageArea']/h3")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//div[@id='languageArea']/h3")).getText() + " Doesn't match Language Skills" ,driver.findElement(By.xpath("//div[@id='languageArea']/h3")).getText().matches("Language Skills"));
+
+    }
+
+    @Test
+    public void testPersonalPageEducationLanguageSkillsElementsNumber() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        if(driver.findElement(By.xpath("//div[@id='languageArea']/h3")).isDisplayed()){
+            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='languageArea']/div/ul/li")).size() , 2, driver.findElements(By.xpath("//div[@id='languageArea']/div/ul/li")).size());
+        }
+    }
+
+    @Test
+    public void testPersonalPageLanguageSkillsInformation() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        if(driver.findElement(By.xpath("//div[@id='languageArea']/h3")).isDisplayed() && driver.findElements(By.xpath("//div[@id='languageArea']/div/ul/li")).size() == 2 ){
+
+            //First Skill
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li")).getText(), driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li")).getText().matches(".*" + "Portuguese" + ".*"));
+            assertEquals("Native", driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li/span")).getText());
+
+            //Second Skill
+            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li[2]")).getText(), driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li[2]")).getText().matches(".*" + "English" + ".*"));
+            assertEquals("Fluent", driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li[2]/span")).getText());
+
         }
     }
 
