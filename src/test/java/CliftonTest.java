@@ -21,8 +21,8 @@ public class CliftonTest {
     public static void setUp() throws Exception {
        //driver = new FirefoxDriver();
        driver = new HtmlUnitDriver();
-       baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
-       //baseUrl = "http://127.0.0.1:8080";
+       //baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
+       baseUrl = "http://127.0.0.1:8080";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
@@ -235,7 +235,12 @@ public class CliftonTest {
         }
     }
 
-
+    @Test
+    public void imageVerification() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+        assertTrue(driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/img")).isDisplayed());
+    }
 
 /*
     @Test
