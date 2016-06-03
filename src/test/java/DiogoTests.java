@@ -1,3 +1,4 @@
+import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -289,7 +290,7 @@ public class DiogoTests {
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
-        if(firstTab == tabs.get(0)){
+        if(firstTab.equals(tabs.get(0))){
             driver.switchTo().window(tabs.get(1));
 
 
@@ -334,7 +335,11 @@ public class DiogoTests {
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
-        if(tabs.get(0) == firstTab){
+        assertEquals(2, tabs.size());
+        assertEquals(tabs.get(0), firstTab);
+
+
+        if(tabs.get(0).equals(firstTab)){
             driver.switchTo().window(tabs.get(1));
 
             assertTrue( "Expected: @DBernardoL || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "@DBernardoL" + ".*"));
@@ -377,7 +382,7 @@ public class DiogoTests {
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
-        if(tabs.get(0) == firstTab){
+        if(tabs.get(0).equals(firstTab)){
             driver.switchTo().window(tabs.get(1));
 
             assertTrue("Expected: MEGA || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
@@ -524,6 +529,29 @@ public class DiogoTests {
 
         }
     }
+
+    @Test
+    public void testPersonalPageLinkHomeExists() throws Exception{
+
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for home isn't show",driver.findElement(By.xpath("//p[@id='teamHome']/a")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='teamHome']/a")).getText() + " Doesn't have Team DCM" ,driver.findElement(By.xpath("//p[@id='teamHome']/a")).getText().matches(".*" + "DCM" + ".*"));
+    }
+
+
+    @Test
+    public void testPersonalPageLinkHomeWorks() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        if(driver.findElement(By.xpath("//p[@id='teamHome']/a")).isDisplayed()){
+            driver.findElement(By.xpath("//p[@id='teamHome']/a")).click();
+            assertEquals("SQ Project Pipeline", driver.getTitle());
+        }
+    }
+
 
     @AfterClass
     public static void tearDown() throws Exception {
