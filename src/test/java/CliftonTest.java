@@ -319,8 +319,57 @@ public class CliftonTest {
         }
 
     }
+    @Test
+    public void languageSkillTest() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+        assertTrue(driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/img")).isDisplayed());
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).getText(), "Language Skills");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[2]")).getText(), "Spanish");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[2]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[1]")).getText(), "Native");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[1]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[2]")).getText(), "Portuguese");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[2]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[1]")).getText(), "Good");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[1]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[2]")).getText(), "English");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[2]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[1]")).getText(), "Very Good");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[1]")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
 
-/*
+
+    /*
     @Test
     public void testCliftonTest() throws Exception {
         driver.get(baseUrl);
