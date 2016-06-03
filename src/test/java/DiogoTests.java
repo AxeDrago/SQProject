@@ -6,12 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import static java.awt.SystemColor.text;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 /**
@@ -257,8 +256,143 @@ public class DiogoTests {
         assertTrue(driver.findElement(By.xpath("//p[2]")).getText() + "Doesn't match Portugal" ,driver.findElement(By.xpath("//p[2]")).getText().matches(".*"+ "Portugal" + ".*"));
     }
 
+    @Test
+    public void testPersonalPageEmailsExists() throws Exception{
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for email isn't show",driver.findElement(By.xpath("//p[@id='email']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='email']")).getText() + " Doesn't have martins5 or martins9" ,driver.findElement(By.xpath("//p[@id='email']")).getText().matches(".*"+ "martins5" + ".*" + "martins9" + ".*"));
+    }
+
+    @Test
+    public void testPersonalPageLinkGithubExists() throws Exception{
 
 
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for github isn't show",driver.findElement(By.xpath("//p[@id='github']/a")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='github']/a")).getText() + " Doesn't have Github" ,driver.findElement(By.xpath("//p[@id='github']/a")).getText().matches("Github"));
+    }
+
+    @Test
+    public void testPersonalPageLinkGithubWorks() throws Exception{
+
+        String firstTab = driver.getWindowHandle();
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for github isn't show",driver.findElement(By.xpath("//p[@id='github']/a")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='github']/a")).getText() + " Doesn't have Github" ,driver.findElement(By.xpath("//p[@id='github']/a")).getText().matches("Github"));
+
+        driver.findElement(By.xpath("//p[@id='github']/a")).click();
+
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+
+        if(firstTab == tabs.get(0)){
+            driver.switchTo().window(tabs.get(1));
+
+
+            assertTrue( "Expected: AxeDrago (Diogo Lopes) || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "AxeDrago" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(0));
+        }else{
+
+            driver.switchTo().window(tabs.get(0));
+
+            assertTrue( "Expected: AxeDrago (Diogo Lopes) || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "AxeDrago" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(1));
+        }
+
+
+    }
+
+    @Test
+    public void testPersonalPageLinkTwitterExists() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for LinkedIn isn't show",driver.findElement(By.xpath("//p[@id='twitter']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='twitter']/a")).getText() + " Doesn't have Twitter" ,driver.findElement(By.xpath("//p[@id='twitter']/a")).getText().matches("Twitter"));
+    }
+
+
+    @Test
+    public void testPersonalPageLinkTwitterWorks() throws Exception{
+
+        String firstTab = driver.getWindowHandle();
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for LinkedIn isn't show",driver.findElement(By.xpath("//p[@id='twitter']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='twitter']/a")).getText() + " Doesn't have Twitter" ,driver.findElement(By.xpath("//p[@id='twitter']/a")).getText().matches("Twitter"));
+
+        driver.findElement(By.xpath("//p[@id='twitter']/a")).click();
+
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+
+        if(tabs.get(0) == firstTab){
+            driver.switchTo().window(tabs.get(1));
+
+            assertTrue( "Expected: @DBernardoL || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "@DBernardoL" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(0));
+        }else{
+            driver.switchTo().window(tabs.get(0));
+
+            assertTrue( "Expected: @DBernardoL || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "@DBernardoL" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(1));
+        }
+
+
+    }
+
+    @Test
+    public void testPersonalPageLinkCVExists() throws Exception{
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for CV isn't show",driver.findElement(By.xpath("//p[@id='cv']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='cv']/a")).getText() + " Doesn't have CV" ,driver.findElement(By.xpath("//p[@id='cv']/a")).getText().matches(".*" + "CV" + ".*"));
+    }
+
+
+    @Test
+    public void testPersonalPageLinkCVWorks() throws Exception {
+
+        String firstTab = driver.getWindowHandle();
+
+        driver.get(baseUrl + "/");
+        driver.findElement(By.xpath("//a/div")).click();
+        assertTrue("Element for LinkedIn isn't show", driver.findElement(By.xpath("//p[@id='cv']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='cv']/a")).getText() + " Doesn't have CV", driver.findElement(By.xpath("//p[@id='cv']")).getText().matches(".*" + "CV" + ".*"));
+
+        driver.findElement(By.xpath("//p[@id='cv']/a")).click();
+
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+
+        if(tabs.get(0) == firstTab){
+            driver.switchTo().window(tabs.get(1));
+
+            assertTrue("Expected: MEGA || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(0));
+        }else {
+            driver.switchTo().window(tabs.get(0));
+
+            assertTrue("Expected: MEGA || Reallity: " + driver.getTitle() + tabs, driver.getTitle().matches(".*" + "MEGA" + ".*"));
+
+            driver.close();
+            driver.switchTo().window(tabs.get(1));
+        }
+
+    }
 
 
 
