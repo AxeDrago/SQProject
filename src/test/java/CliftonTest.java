@@ -368,6 +368,21 @@ public class CliftonTest {
         }
     }
 
+    @Test
+    public void footerVerificationTest() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
+        assertTrue(driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/img")).isDisplayed());
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[3]/div/div/div")).getText(), "Copyright © 2016 Team DCM - All rights reserved.");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[3]/div/div/div")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        driver.findElement(By.xpath("/html/body/div[3]/div/div/div/a")).click();
+
+    }
+
 
     /*
     @Test
