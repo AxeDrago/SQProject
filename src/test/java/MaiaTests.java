@@ -137,6 +137,36 @@ public class MaiaTests{
             try { if ("Rúben Maia Personal Page".equals(driver.getTitle())) break; } catch (Exception e) {}
             Thread.sleep(1000);
         }
+        assertTrue(isElementPresent(By.linkText("@rbnmaia")));
+        assertTrue(isElementPresent(By.id("email")));
+        assertTrue(isElementPresent(By.linkText("linkedin.com/in/rubenmaia")));
+        assertTrue(isElementPresent(By.linkText("@ruben_maia")));
+        assertTrue(isElementPresent(By.linkText("Team DCM")));
+        try {
+            assertEquals("maia.ruben@gmail.com", driver.findElement(By.id("email")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("@rbnmaia", driver.findElement(By.linkText("@rbnmaia")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("linkedin.com/in/rubenmaia", driver.findElement(By.linkText("linkedin.com/in/rubenmaia")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("@ruben_maia", driver.findElement(By.linkText("@ruben_maia")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        try {
+            assertEquals("Team DCM", driver.findElement(By.linkText("Team DCM")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
 
         assertTrue(isElementPresent(By.xpath("//p[@id='email']/i")));
         assertTrue(isElementPresent(By.xpath("//p[@id='github']/i")));
@@ -235,7 +265,7 @@ public class MaiaTests{
         assertTrue(isElementPresent(By.xpath("//p[2]/small")));
         assertEquals("January 2010 - April 2010 | Leiria", driver.findElement(By.xpath("//p[2]/small")).getText());
         assertTrue(isElementPresent(By.cssSelector("div.timeline-body > p")));
-        assertEquals("DEI - Technical support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
+        assertEquals("DEI - Technical Support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
         try {
             assertTrue(isElementPresent(By.cssSelector("div.timeline-badge.info")));
         } catch (Error e) {
@@ -282,7 +312,7 @@ public class MaiaTests{
             verificationErrors.append(e.toString());
         }
         try {
-            assertEquals("DEI - Technical support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
+            assertEquals("DEI - Technical Support", driver.findElement(By.cssSelector("div.timeline-body > p")).getText());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
@@ -445,6 +475,52 @@ public class MaiaTests{
             verificationErrors.append(e.toString());
         }
         assertEquals("BasicFrench", driver.findElement(By.xpath("//div[3]/ul/li[3]")).getText());
+    }
+    @Test
+    public void testFooterToTeamPage() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if (isElementPresent(By.id("home"))) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        try {
+            assertEquals("Team DCM", driver.findElement(By.id("home")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        driver.findElement(By.id("home")).click();
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("SQ Project Pipeline".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+
+    }
+
+    @Test
+    public void testHeaderToTeamPage() throws Exception {
+        driver.get(baseUrl + "/MaiaPersonal.html");
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if (isElementPresent(By.linkText("Team DCM"))) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
+        try {
+            assertEquals("Team DCM", driver.findElement(By.linkText("Team DCM")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        driver.findElement(By.linkText("Team DCM")).click();
+        for (int second = 0;; second++) {
+            if (second >= 60) fail("timeout");
+            try { if ("SQ Project Pipeline".equals(driver.getTitle())) break; } catch (Exception e) {}
+            Thread.sleep(1000);
+        }
+
     }
     /*@Test
     public void testPersonalStructure() throws Exception {
