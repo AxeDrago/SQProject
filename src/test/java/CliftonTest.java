@@ -247,73 +247,73 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/h3[1]/span[2]")).getText(), "Programing Skills");
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/h3[1]/span[2]")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[1]/span[2]")).getText(), "Programing Skills");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[1]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
             }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[1]/span")).getText(), "HTML");
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[1]/span")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/span")).getText(), "HTML");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
             }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[1]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[1]/div/div")).getText());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[1]/div/div/span")).isDisplayed());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[1]/div/div")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/div/div")).getText());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/div/div/span")).isDisplayed());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/div/div")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[2]/span")).getText(), "CSS");
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[2]/span")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/span")).getText(), "CSS");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[2]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[2]/div/div")).getText());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[2]/div/div/span")).isDisplayed());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[2]/div/div")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/div/div")).getText());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/div/div/span")).isDisplayed());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/div/div")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[3]/span")).getText(), "SQL");
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[3]/span")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/span")).getText(), "SQL");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[3]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[3]/div/div")).getText());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[3]/div/div/span")).isDisplayed());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[3]/div/div")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/div/div")).getText());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/div/div/span")).isDisplayed());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/div/div")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[4]/span")).getText(), "Java");
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[4]/span")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/span")).getText(), "Java");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[4]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[4]/div/div")).getText());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[4]/div/div/span")).isDisplayed());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[4]/div/div")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/div/div/span")).getText(),driver.findElement(By.xpath("//html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/div/div")).getText());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/div/div/span")).isDisplayed());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/div/div")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[5]/span")).getText(), "Android");
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[5]/span")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/span")).getText(), "Android");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[5]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[5]/div/div")).getText());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[5]/div/div/span")).isDisplayed());
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div/div[1]/ul/li[5]/div/div")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/div/div/span")).getText(),driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/div/div")).getText());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/div/div/span")).isDisplayed());
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/div/div")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
