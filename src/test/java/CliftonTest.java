@@ -15,7 +15,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import static javafx.scene.input.KeyCode.J;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.fail;
 
