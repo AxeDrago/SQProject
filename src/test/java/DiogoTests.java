@@ -1,3 +1,6 @@
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -5,6 +8,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -23,7 +27,7 @@ import static org.junit.Assert.fail;
  */
 public class DiogoTests {
 
-    private static boolean local = false;
+    private static boolean local = true;
     private static WebDriver driver;
     private static String baseUrl;
     private static StringBuffer verificationErrors = new StringBuffer();
@@ -32,7 +36,14 @@ public class DiogoTests {
 
     @BeforeClass
     public static void  setUp() throws Exception {
-        driver = new HtmlUnitDriver();
+        driver = new HtmlUnitDriver(true) {
+            @Override
+            protected WebClient newWebClient(BrowserVersion version) {
+                WebClient webClient = super.newWebClient(version);
+                webClient.getOptions().setThrowExceptionOnScriptError(false);
+                return webClient;
+            }
+        };
         if(local){
             baseUrl = "http://localhost:8080";
         }else{
@@ -41,7 +52,7 @@ public class DiogoTests {
 
         pageInfo = parseJson();
 
-        System.out.println(pageInfo);
+        System.out.println(pageInfo.get("name"));
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
@@ -53,8 +64,7 @@ public class DiogoTests {
 
         try {
 
-            //jsonObject  = (JSONObject) parser.parse(new FileReader("/D:/Mega/MEGAsync/IntelliJProjects/SQ_Project/src/main/javascript/json/memberPageScripts.txt"));
-            jsonObject  = (JSONObject) parser.parse(new FileReader("src/main/javascript/json/diogoPageInfo.txt"));
+            jsonObject  = (JSONObject) parser.parse(new FileReader("src/main/javascript/json/diogoPageInfo.json"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -288,16 +298,16 @@ public class DiogoTests {
     public void testPersonalPageEmailsExists() throws Exception{
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for email isn't show",driver.findElement(By.xpath("//p[@id='email']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='email']")).getText() + " Doesn't have martins5 or martins9" ,driver.findElement(By.xpath("//p[@id='email']")).getText().matches(".*"+ "martins5" + ".*" + "martins9" + ".*"));
+        assertTrue("Element for email isn't show",driver.findElement(By.xpath("//span[@id='email']")).isDisplayed());
+        assertEquals(pageInfo.get("email"), driver.findElement(By.xpath("//span[@id='email']")).getText());
     }
 
     @Test
     public void testPersonalPageLinkGithubExists() throws Exception{
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for github isn't show",driver.findElement(By.xpath("//p[@id='github']/a")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='github']/a")).getText() + " Doesn't have Github" ,driver.findElement(By.xpath("//p[@id='github']/a")).getText().matches("Github"));
+        assertTrue("Element for github isn't show",driver.findElement(By.xpath("//a[@id='github']")).isDisplayed());
+        assertEquals(pageInfo.get("github"), driver.findElement(By.xpath("//a[@id='github']")).getText());
     }
 
     @Test
@@ -307,10 +317,10 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for github isn't show",driver.findElement(By.xpath("//p[@id='github']/a")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='github']/a")).getText() + " Doesn't have Github" ,driver.findElement(By.xpath("//p[@id='github']/a")).getText().matches("Github"));
+        assertTrue("Element for github isn't show",driver.findElement(By.xpath("//a[@id='github']")).isDisplayed());
+        assertEquals(pageInfo.get("github"), driver.findElement(By.xpath("//a[@id='github']")).getText());
 
-        driver.findElement(By.xpath("//p[@id='github']/a")).click();
+        driver.findElement(By.xpath("//a[@id='github']")).click();
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
@@ -340,8 +350,8 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for LinkedIn isn't show",driver.findElement(By.xpath("//p[@id='twitter']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='twitter']/a")).getText() + " Doesn't have Twitter" ,driver.findElement(By.xpath("//p[@id='twitter']/a")).getText().matches("Twitter"));
+        assertTrue("Element for LinkedIn isn't show",driver.findElement(By.xpath("//a[@id='twitter']")).isDisplayed());
+        assertEquals(pageInfo.get("twitter"), driver.findElement(By.xpath("//a[@id='twitter']")).getText());
     }
 
 
@@ -352,15 +362,12 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for LinkedIn isn't show",driver.findElement(By.xpath("//p[@id='twitter']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='twitter']/a")).getText() + " Doesn't have Twitter" ,driver.findElement(By.xpath("//p[@id='twitter']/a")).getText().matches("Twitter"));
+        assertTrue("Element for LinkedIn isn't show",driver.findElement(By.xpath("//a[@id='twitter']")).isDisplayed());
+        assertEquals(pageInfo.get("twitter"), driver.findElement(By.xpath("//a[@id='twitter']")).getText());
 
-        driver.findElement(By.xpath("//p[@id='twitter']/a")).click();
+        driver.findElement(By.xpath("//a[@id='twitter']")).click();
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-
-        assertEquals(2, tabs.size());
-        assertEquals(tabs.get(0), firstTab);
 
         if(tabs.get(0).equals(firstTab)){
             driver.switchTo().window(tabs.get(1));
@@ -385,8 +392,8 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for CV isn't show",driver.findElement(By.xpath("//p[@id='cv']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='cv']/a")).getText() + " Doesn't have CV" ,driver.findElement(By.xpath("//p[@id='cv']/a")).getText().matches(".*" + "CV" + ".*"));
+        assertTrue("Element for CV isn't show",driver.findElement(By.xpath("//a[@id='cv']")).isDisplayed());
+        assertEquals(pageInfo.get("cv"), driver.findElement(By.xpath("//a[@id='cv']")).getText());
     }
 
 
@@ -397,10 +404,10 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for LinkedIn isn't show", driver.findElement(By.xpath("//p[@id='cv']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='cv']/a")).getText() + " Doesn't have CV", driver.findElement(By.xpath("//p[@id='cv']")).getText().matches(".*" + "CV" + ".*"));
+        assertTrue("Element for CV isn't show",driver.findElement(By.xpath("//a[@id='cv']")).isDisplayed());
+        assertEquals(pageInfo.get("cv"), driver.findElement(By.xpath("//a[@id='cv']")).getText());
 
-        driver.findElement(By.xpath("//p[@id='cv']/a")).click();
+        driver.findElement(By.xpath("//a[@id='cv']")).click();
 
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 
@@ -427,9 +434,10 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Header for education history isn't working",driver.findElement(By.xpath("//h3[@id='edu_history']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//h3[@id='edu_history']")).getText() + " Doesn't match education history" ,driver.findElement(By.xpath("//h3[@id='edu_history']")).getText().matches("Education History"));
-
+        assertTrue("Header for education history isn't working",driver.findElement(By.xpath("//p[@id='edu_history']")).isDisplayed());
+        JSONArray educationArray = (JSONArray) pageInfo.get("educationInformation");
+        JSONObject edObject = (JSONObject) educationArray.get(0);
+        assertEquals(edObject.get("areaName"), driver.findElement(By.xpath("//p[@id='edu_history']")).getText());
     }
 
     @Test
@@ -437,9 +445,9 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        if(driver.findElement(By.xpath("//h3[@id='edu_history']")).isDisplayed()){
-            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() , 1, driver.findElements(By.xpath("//div[@id='education']/ul/li")).size());
-
+        if(driver.findElement(By.xpath("//p[@id='edu_history']")).isDisplayed()){
+            JSONArray educationArray = (JSONArray) pageInfo.get("educationInformation");
+            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() , educationArray.size(), driver.findElements(By.xpath("//div[@id='education']/ul/li")).size());
         }
     }
 
@@ -449,17 +457,21 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        if(driver.findElement(By.xpath("//h3[@id='edu_history']")).isDisplayed() && driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() == 1 ){
+        JSONArray educationArray = (JSONArray) pageInfo.get("educationInformation");
+        if(driver.findElement(By.xpath("//p[@id='edu_history']")).isDisplayed() && driver.findElements(By.xpath("//div[@id='education']/ul/li")).size() == educationArray.size() ){
+            JSONObject edObject = (JSONObject) educationArray.get(0);
             //Ano Elemento
-            assertEquals("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText() , "2012", driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText());
+            assertEquals(edObject.get("year"), driver.findElement(By.xpath("//div[@id='education']/ul/li/div")).getText());
             //Instituto
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/h4")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/h4")).getText().matches(".*" + "Politécnico" + ".*" + "Leiria" + ".*"));
+            assertEquals(edObject.get("school"), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/h4")).getText());
             //Curso
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p")).getText().matches(".*" + "Computer Engineering" + ".*"));
+            assertEquals(edObject.get("course"), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p/small")).getText());
             //Data
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p[2]/small")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p[2]/small")).getText().matches(".*" + "2012" + ".*" + "2015" + ".*" + "Leiria" + ".*"));
+            assertEquals(edObject.get("duration"), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p[2]/small/small")).getText());
+            //Location
+            assertEquals(edObject.get("location"), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div/p[2]/small/small[2]")).getText());
             //Nível
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div[2]/p")).getText(), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div[2]/p")).getText().matches(".*" + "Bachelor Degree" + ".*"));
+            assertEquals(edObject.get("level"), driver.findElement(By.xpath("//div[@id='education']/ul/li/div[2]/div[2]/p")).getText());
 
         }
     }
@@ -467,99 +479,117 @@ public class DiogoTests {
     @Test
     public void testPersonalPageProgrammingSkillsExists() throws Exception{
 
+        JSONArray skillsArray = (JSONArray) pageInfo.get("skillsInformation");
+        JSONObject skillObject = (JSONObject) skillsArray.get(0);
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Header for programming skills isn't working " + driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).getText() , driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).getText() + " Doesn't match Programming Skills" ,driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).getText().matches("Programming Skills"));
-
+        assertTrue("Header for programming skills isn't working " + driver.findElement(By.xpath("//div[2]/div/h3/p")).getText() , driver.findElement(By.xpath("//div[2]/div/h3/p")).isDisplayed());
+        assertEquals(skillObject.get("areaName"), driver.findElement(By.xpath("//div[2]/div/h3/p")).getText());
     }
 
     @Test
     public void testPersonalPageEducationProgrammingSkillsElementsNumber() throws Exception{
 
+        JSONArray skillsArray = (JSONArray) pageInfo.get("skillsInformation");
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        if(driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).isDisplayed()){
-            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='skillsArea']/div/ul/li")).size() , 5, driver.findElements(By.xpath("//div[@id='skillsArea']/div/ul/li")).size());
+        if(driver.findElement(By.xpath("//div[2]/div/h3/p")).isDisplayed()){
+            assertEquals( skillsArray.size() - 1, driver.findElements(By.xpath("//div[@id='skillsArea']/div/ul/li")).size());
         }
     }
 
     @Test
     public void testPersonalPageProgrammingSkillsInformation() throws Exception{
 
+        JSONArray skillsArray = (JSONArray) pageInfo.get("skillsInformation");
+
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        if(driver.findElement(By.xpath("//div[@id='skillsArea']/h3")).isDisplayed() && driver.findElements(By.xpath("//div[@id='skillsArea']/div/ul/li")).size() == 5 ){
+        if(driver.findElement(By.xpath("//div[2]/div/h3/p")).isDisplayed() && driver.findElements(By.xpath("//div[@id='skillsArea']/div/ul/li")).size() == skillsArray.size() - 1 ){
             //First Skill
-            assertEquals("Java", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/span")).getText());
-            assertEquals("80%", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/div")).getText());
-            assertEquals("80%", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/div/div/span")).getText());
+            JSONObject skillObject1 = (JSONObject) skillsArray.get(1);
+            assertEquals(skillObject1.get("name"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/span")).getText());
+            assertEquals(skillObject1.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/div")).getText());
+            assertEquals(skillObject1.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li/div/div/span")).getText());
+
             //Second Skill
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/span")).getText().matches(".*" + "HTML" + ".*"));
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div")).getText().matches("70%"));
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div/div/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div/div/span")).getText().matches("70%"));
+            JSONObject skillObject2 = (JSONObject) skillsArray.get(2);
+            assertEquals(skillObject2.get("name"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/span")).getText());
+            assertEquals(skillObject2.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div")).getText());
+            assertEquals(skillObject2.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[2]/div/div/span")).getText());
+
             //Third Skill
-            assertEquals("CSS", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/span")).getText());
-            assertEquals("75%" ,driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/div")).getText());
-            assertEquals("75%",driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/div/div/span")).getText());
+            JSONObject skillObject3 = (JSONObject) skillsArray.get(3);
+            assertEquals(skillObject3.get("name"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/span")).getText());
+            assertEquals(skillObject3.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/div")).getText());
+            assertEquals(skillObject3.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[3]/div/div/span")).getText());
+
             //Fourth Skill
-            assertEquals("PHP", driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/span")).getText());
-            assertEquals("65%" ,driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/div")).getText());
-            assertEquals("65%",driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/div/div/span")).getText());
+            JSONObject skillObject4 = (JSONObject) skillsArray.get(4);
+            assertEquals(skillObject4.get("name"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/span")).getText());
+            assertEquals(skillObject4.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/div")).getText());
+            assertEquals(skillObject4.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[4]/div/div/span")).getText());
 
             //Fifth Skill
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/span")).getText().matches(".*" + "mySQL" + ".*"));
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div")).getText().matches("75%"));
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div/div/span")).getText(), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div/div/span")).getText().matches("75%"));
+            JSONObject skillObject5 = (JSONObject) skillsArray.get(5);
+            assertEquals(skillObject5.get("name"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/span")).getText());
+            assertEquals(skillObject5.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div")).getText());
+            assertEquals(skillObject5.get("percentage"), driver.findElement(By.xpath("//div[@id='skillsArea']/div/ul/li[5]/div/div/span")).getText());
         }
     }
 
     @Test
     public void testPersonalPageLanguageSkillsExists() throws Exception{
 
+        JSONArray languageArray = (JSONArray) pageInfo.get("languageInformation");
+        JSONObject languageObject = (JSONObject) languageArray.get(0);
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Header for language skills isn't working " + driver.findElement(By.xpath("//div[@id='languageArea']/h3")).getText() , driver.findElement(By.xpath("//div[@id='languageArea']/h3")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//div[@id='languageArea']/h3")).getText() + " Doesn't match Language Skills" ,driver.findElement(By.xpath("//div[@id='languageArea']/h3")).getText().matches("Language Skills"));
+        assertTrue("Header for language skills isn't working " + driver.findElement(By.xpath("//div[2]/h3/p")).getText() , driver.findElement(By.xpath("//div[2]/h3/p")).isDisplayed());
+        assertEquals(languageObject.get("areaName"), driver.findElement(By.xpath("//div[2]/h3/p")).getText());
 
     }
 
     @Test
     public void testPersonalPageEducationLanguageSkillsElementsNumber() throws Exception{
 
+        JSONArray languageArray = (JSONArray) pageInfo.get("languageInformation");
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        if(driver.findElement(By.xpath("//div[@id='languageArea']/h3")).isDisplayed()){
-            assertEquals("Real: " + driver.findElements(By.xpath("//div[@id='languageArea']/div/ul/li")).size() , 2, driver.findElements(By.xpath("//div[@id='languageArea']/div/ul/li")).size());
+        if(driver.findElement(By.xpath("//div[2]/h3/p")).isDisplayed()){
+            assertEquals(languageArray.size() - 1, driver.findElements(By.xpath("//div[@id='languageArea']/div/ul/li")).size());
         }
     }
 
     @Test
     public void testPersonalPageLanguageSkillsInformation() throws Exception{
 
+
+        JSONArray languageArray = (JSONArray) pageInfo.get("languageInformation");
+
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        if(driver.findElement(By.xpath("//div[@id='languageArea']/h3")).isDisplayed() && driver.findElements(By.xpath("//div[@id='languageArea']/div/ul/li")).size() == 2 ){
+        if(driver.findElement(By.xpath("//div[2]/h3/p")).isDisplayed() && driver.findElements(By.xpath("//div[@id='languageArea']/div/ul/li")).size() == languageArray.size() - 1 ){
 
             //First Skill
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li")).getText(), driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li")).getText().matches(".*" + "Portuguese" + ".*"));
-            assertEquals("Native", driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li/span")).getText());
+            JSONObject languageObject = (JSONObject) languageArray.get(1);
+            assertEquals(languageObject.get("name"), driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li/span[2]")).getText());
+            assertEquals(languageObject.get("type"), driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li/span")).getText());
 
             //Second Skill
-            assertTrue("Real: " + driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li[2]")).getText(), driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li[2]")).getText().matches(".*" + "English" + ".*"));
-            assertEquals("Fluent", driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li[2]/span")).getText());
+            JSONObject languageObject1 = (JSONObject) languageArray.get(2);
+            assertEquals(languageObject1.get("name"), driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li[2]/span[2]")).getText());
+            assertEquals(languageObject1.get("type"), driver.findElement(By.xpath("//div[@id='languageArea']/div/ul/li[2]/span")).getText());
 
         }
     }
 
     @Test
     public void testPersonalPageLinkHomeExists() throws Exception{
-
-
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        assertTrue("Element for home isn't show",driver.findElement(By.xpath("//p[@id='teamHome']/a")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//p[@id='teamHome']/a")).getText() + " Doesn't have Team DCM" ,driver.findElement(By.xpath("//p[@id='teamHome']/a")).getText().matches(".*" + "DCM" + ".*"));
+        assertTrue("Element for home isn't show",driver.findElement(By.xpath("//a[@id='teamHome']")).isDisplayed());
+        assertEquals(pageInfo.get("teamName"), driver.findElement(By.xpath("//a[@id='teamHome']")).getText());
     }
 
 
@@ -568,8 +598,8 @@ public class DiogoTests {
 
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
-        if(driver.findElement(By.xpath("//p[@id='teamHome']/a")).isDisplayed()){
-            driver.findElement(By.xpath("//p[@id='teamHome']/a")).click();
+        if(driver.findElement(By.xpath("//a[@id='teamHome']")).isDisplayed()){
+            driver.findElement(By.xpath("//a[@id='teamHome']")).click();
             assertEquals("SQ Project Pipeline", driver.getTitle());
         }
     }

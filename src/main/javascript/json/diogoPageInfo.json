@@ -1,0 +1,32 @@
+
+        {
+            "name": "Diogo Lopes",
+            "profession": "Software Engineer",
+            "country": "Portugal",
+            "teamName": "Team DCM",
+            "email": "diogomartins5@hotmail.com || diogomartins9@gmail.com",
+            "github": "Github",
+            "twitter": "Twitter",
+            "cv": "Download CV",
+            "educationInformation": [
+                {"areaName": "Education History", "year": "2012", "school":"Instituto Politécnico de Leiria", "course": "Computer Engineering", "duration": "2012-2015", "location": "Leiria", "level": "Bachelor Degree"}
+            ],
+
+            "skillsInformation": [
+                {"areaName":"Programming Skills"},
+                {"name":"Java", "percentage":"80%"},
+                {"name":"HTML", "percentage":"70%"},
+                {"name":"CSS", "percentage":"75%"},
+                {"name":"PHP", "percentage":"65%"},
+                {"name":"mySQL", "percentage":"75%"}
+            ],
+
+            "languageInformation": [
+                {"areaName":"Language Skills"},
+                {"name":"Portuguese", "type":"Native"},
+                {"name":"English", "type":"Fluent"}
+            ]
+
+        }
+
+
