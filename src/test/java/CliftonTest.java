@@ -382,43 +382,43 @@ public class CliftonTest {
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         assertTrue(driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/img")).isDisplayed());
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).getText(), "Language Skills");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).getText(), lIObject.get("areaName"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[2]")).getText(), "Spanish");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[2]")).getText(), lIObject1.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[1]")).getText(), "Native");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[1]")).getText(), lIObject1.get("type"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[2]")).getText(), "Portuguese");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[2]")).getText(), lIObject2.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[1]")).getText(), "Good");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[1]")).getText(), lIObject2.get("type"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[2]")).getText(), "English");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[2]")).getText(), lIObject3.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[1]")).getText(), "Very Good");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[1]")).getText(), lIObject3.get("type"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
