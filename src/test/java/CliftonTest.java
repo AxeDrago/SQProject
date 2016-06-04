@@ -12,7 +12,8 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import static junit.framework.TestCase.assertTrue;
+
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class CliftonTest {
