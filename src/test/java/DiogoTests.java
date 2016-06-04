@@ -27,7 +27,7 @@ import static org.junit.Assert.fail;
  */
 public class DiogoTests {
 
-    private static boolean local = true;
+    private static boolean local = false;
     private static WebDriver driver;
     private static String baseUrl;
     private static StringBuffer verificationErrors = new StringBuffer();
@@ -52,7 +52,6 @@ public class DiogoTests {
 
         pageInfo = parseJson();
 
-        System.out.println(pageInfo.get("name"));
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
