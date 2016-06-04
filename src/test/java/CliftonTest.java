@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import static javafx.scene.input.KeyCode.J;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -36,7 +38,7 @@ public class CliftonTest {
         pageInfo = parseJson();
         System.out.println(pageInfo);
 
-        //System.out.println("hola"+pageInfo.get("name"));
+
     }
 
     private static JSONObject parseJson() {
