@@ -115,8 +115,8 @@ public class CliftonTest {
     public void contactInformationLink() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
-        driver.findElement(By.linkText("@clifton26")).click();
-        driver.findElement(By.linkText("@titon26")).click();
+        driver.findElement(By.linkText(pageInfo.get("github").toString())).click();
+        driver.findElement(By.linkText(pageInfo.get("twitter").toString())).click();
     }
 
     @Test
