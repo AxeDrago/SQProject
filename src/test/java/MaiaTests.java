@@ -4,12 +4,19 @@
  */
 
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.String;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -28,13 +35,39 @@ public class MaiaTests{
     private String baseUrl;
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
+    private static JSONObject pageInfo;
+    private static boolean local = false;
 
     @Before
     public void setUp() throws Exception {
         driver = new HtmlUnitDriver();
-        baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com/";
-        //baseUrl = "http://127.0.0.1:8080";
+        if(local){
+            baseUrl = "http://127.0.0.1:8080";
+        }else{
+            baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
+        }
+
+        pageInfo = parseJson();
+
+        System.out.println(pageInfo);
+
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+
+    private static JSONObject parseJson() {
+        JSONParser parser = new JSONParser();
+
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject  = (JSONObject) parser.parse(new FileReader("src/main/javascript/json/rubenPageInfo.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject;
     }
 
     @Test
@@ -257,7 +290,7 @@ public class MaiaTests{
     public void testEducationStructure() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
         assertTrue(isElementPresent(By.cssSelector("div.timeline-badge.info")));
-        assertEquals("2010", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
+        assertEquals("2015", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
         assertTrue(isElementPresent(By.cssSelector("h4.timeline-title")));
         assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.cssSelector("h4.timeline-title")).getText());
         assertTrue(isElementPresent(By.cssSelector("small.text-muted")));
@@ -327,7 +360,7 @@ public class MaiaTests{
         }
 
         assertTrue(isElementPresent(By.xpath("//ul[2]/li/div")));
-        assertEquals("2010", driver.findElement(By.xpath("//ul[2]/li/div")).getText());
+        assertEquals("2015", driver.findElement(By.xpath("//ul[2]/li/div")).getText());
         assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/h4")));
         assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.xpath("//ul[2]/li/div[2]/div/h4")).getText());
         assertTrue(isElementPresent(By.xpath("//ul[2]/li/div[2]/div/p/small")));
@@ -342,7 +375,7 @@ public class MaiaTests{
             verificationErrors.append(e.toString());
         }
         try {
-            assertEquals("2010", driver.findElement(By.xpath("//ul[2]/li/div")).getText());
+            assertEquals("2015", driver.findElement(By.xpath("//ul[2]/li/div")).getText());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
@@ -522,6 +555,113 @@ public class MaiaTests{
         }
 
     }
+    @Test
+    public void contactInformationLinks() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        driver.findElement(By.linkText("@rbnmaia")).click();
+        driver.findElement(By.linkText("@ruben_maia")).click();
+        driver.findElement(By.linkText("linkedin.com/in/rubenmaia")).click();
+    }
+
+    @Test
+    public void testPersonalPageProfessionExists() throws Exception{
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        assertTrue("Element profession isn't show",driver.findElement(By.xpath("//p[@id='profession']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='profession']")).getText() + "Doesn't match Software" ,driver.findElement(By.xpath("//p[@id='profession']")).getText().matches(".*"+ "Software" + ".*"));
+    }
+
+    @Test
+    public void testPersonalPageNameExists() throws Exception{
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        assertTrue("Element name isn't show",driver.findElement(By.xpath("//h3[@id='name']")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//h3[@id='name']")).getText() + "Doesn't match Rúben" ,driver.findElement(By.xpath("//h3[@id='name']")).getText().matches(".*"+ "Rúben" + ".*"));
+    }
+
+    @Test
+    public void testPersonalPageImage() throws Exception{
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        assertTrue(driver.findElements(By.xpath("//img[@alt='profile image']")).size() != 0);
+    }
+
+    @Test
+    public void testPersonalPageEducationHistoryElementsNumber() throws Exception{
+
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        if(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[1]/h3[2]")).isDisplayed()){
+            assertEquals("Real: " + driver.findElements(By.xpath("/html/body/div[2]/div/div/div/div[1]/ul[2]/li")).size() , 1, driver.findElements(By.xpath("/html/body/div[2]/div/div/div/div[1]/ul[2]/li")).size());
+
+        }
+    }
+
+    @Test
+    public void testPersonalPageLanguageSkillsInformation() throws Exception{
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        if(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).isDisplayed() && driver.findElements(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).size() == 3 ){
+
+            //Native Skill
+            assertTrue("Real: " + driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li")).getText(), driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li")).getText().matches(".*" + "Portuguese" + ".*"));
+            assertEquals("Native", driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li/span")).getText());
+
+            //Fluent Skill
+            assertTrue("Real: " + driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li[2]")).getText(), driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li[2]")).getText().matches(".*" + "English" + ".*"));
+            assertEquals("Fluent", driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li[2]/span")).getText());
+
+            //Basic Skill
+            assertTrue("Real: " + driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li[3]")).getText(), driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li[3]")).getText().matches(".*" + "French" + ".*"));
+            assertEquals("Basic", driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]/div/ul/li[3]/span")).getText());
+        }
+    }
+
+    @Test
+    public void testPersonalPageLinkHomeExists() throws Exception{
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        assertTrue("Element for home isn't show",driver.findElement(By.xpath("//p[@id='teamHome']/a")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("//p[@id='teamHome']/a")).getText() + " Doesn't have Team DCM" ,driver.findElement(By.xpath("//p[@id='teamHome']/a")).getText().matches(".*" + "DCM" + ".*"));
+    }
+    @Test
+    public void testPersonalPageLinkHomeWorks() throws Exception{
+
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        if(driver.findElement(By.xpath("//p[@id='teamHome']/a")).isDisplayed()){
+            driver.findElement(By.xpath("//p[@id='teamHome']/a")).click();
+            assertEquals("SQ Project Pipeline", driver.getTitle());
+        }
+    }
+
+    @Test
+    public void testPersonalPageEducationHistoryExists() throws Exception{
+
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        assertTrue("Header for education history isn't working",driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[1]/h3[2]")).isDisplayed());
+        assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[1]/h3[2]")).getText() + " Doesn't match education history" ,driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[1]/h3[2]")).getText().matches("Education History"));
+
+    }
+
+    @Test
+    public void footerVerificationTest() throws Exception {
+        driver.get(baseUrl);
+        driver.findElement(By.xpath("//div[3]/div/a/div/div/img")).click();
+        assertTrue(driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/img")).isDisplayed());
+        try {
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[3]/div/div/div")).getText(), "Copyright © 2016 Team DCM - All rights reserved.");
+            assertTrue(driver.findElement(By.xpath("/html/body/div[3]/div/div/div")).isDisplayed());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+        driver.findElement(By.xpath("/html/body/div[3]/div/div/div/a")).click();
+
+    }
+
+    //First Page Tests: Unfortunately that page was deleted in process of create a new one :'(
     /*@Test
     public void testPersonalStructure() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
