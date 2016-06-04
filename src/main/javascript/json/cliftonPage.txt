@@ -32,7 +32,7 @@
                          "year":"2013",
                          "university":"Universidad Tecnologica de Panama",
                          "course":"Computer System Engineering",
-                         "duration":"2009-2013",
+                         "duration":"2009-2013 |",
                          "location":"Panama",
                          "level":"Bachelor Degree"
                      }],

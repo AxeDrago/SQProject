@@ -241,43 +241,43 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[2]")).getText(), "Education History");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[2]")).getText(), eHObject.get("areaName"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
           }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[1]")).getText(), "2013");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[1]")).getText(), eHObject.get("year"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
           }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/h4")).getText(), "Universidad Tecnologica de Panama");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/h4")).getText(), eHObject.get("university"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/h4")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
           }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[1]/small")).getText(), "Computer System Engineering");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[1]/small")).getText(), eHObject.get("course"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[1]/small")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
            }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), "2009-2013 |");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), eHObject.get("duration"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), "Panama");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), eHObject.get("location"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
           }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[2]/p")).getText(), "Bachelor Degree");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[2]/p")).getText(), eHObject.get("level"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[2]/p")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
