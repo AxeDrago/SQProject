@@ -37,7 +37,7 @@
                          "level":"Bachelor Degree"
                      }],
         "skillsInformation": [
-            {"areaName":"Programming Skills"},
+            {"areaName":"Programing Skills"},
             {"name":"HTML", "percentage":"75%"},
             {"name":"CSS", "percentage":"60%"},
             {"name":"SQL", "percentage":"90%"},

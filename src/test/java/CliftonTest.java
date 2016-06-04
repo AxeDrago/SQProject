@@ -23,7 +23,7 @@ public class CliftonTest {
     private static String baseUrl;
     private boolean acceptNextAlert = true;
     private static StringBuffer verificationErrors = new StringBuffer();
-    private static JSONObject pageInfo, wIObject,wIObject1,wIObject2,eHObject,sKObject,lIObject;
+    private static JSONObject pageInfo, wIObject,wIObject1,wIObject2,eHObject,sKObject,sKObject1,sKObject2,sKObject3,sKObject4,sKObject5,lIObject,lIObject1,lIObject2,lIObject3;
 
 
 
@@ -49,7 +49,15 @@ public class CliftonTest {
         wIObject2 = (JSONObject) workInformationArray.get(2);
         eHObject = (JSONObject) educatioHistorynArray.get(0);
         sKObject = (JSONObject) skillsInformationnArray.get(0);
+        sKObject1 = (JSONObject) skillsInformationnArray.get(1);
+        sKObject2 = (JSONObject) skillsInformationnArray.get(2);
+        sKObject3 = (JSONObject) skillsInformationnArray.get(3);
+        sKObject4 = (JSONObject) skillsInformationnArray.get(4);
+        sKObject5 = (JSONObject) skillsInformationnArray.get(5);
         lIObject = (JSONObject) languageInformationArray.get(0);
+        lIObject1 = (JSONObject) languageInformationArray.get(1);
+        lIObject2 = (JSONObject) languageInformationArray.get(2);
+        lIObject3 = (JSONObject) languageInformationArray.get(3);
 
         // System.out.print(edObject.get("areaName"));
 
@@ -296,13 +304,13 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[1]/span[2]")).getText(), "Programing Skills");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[1]/span[2]")).getText(), sKObject.get("areaName"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[1]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
             }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/span")).getText(), "HTML");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/span")).getText(), sKObject1.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -315,7 +323,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/span")).getText(), "CSS");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/span")).getText(), sKObject2.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -328,7 +336,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/span")).getText(), "SQL");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/span")).getText(), sKObject3.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -341,7 +349,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/span")).getText(), "Java");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/span")).getText(), sKObject4.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -354,7 +362,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/span")).getText(), "Android");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/span")).getText(), sKObject5.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
