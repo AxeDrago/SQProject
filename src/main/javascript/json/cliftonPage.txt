@@ -2,7 +2,7 @@
     {
         "name":"Clifton Clunie",
         "profession":"Computer System Engineer",
-        "country":"Panama",
+        "country":"Panama, Panama",
         "email":"clifton.clunie26@gmail.com",
         "github":"@clifton26",
         "twitter":"@titon26",

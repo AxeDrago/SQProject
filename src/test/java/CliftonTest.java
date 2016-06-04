@@ -34,7 +34,9 @@ public class CliftonTest {
 
        //java
         pageInfo = parseJson();
-        System.out.println("hola"+pageInfo);
+        System.out.println(pageInfo);
+
+        //System.out.println("hola"+pageInfo.get("name"));
     }
 
     private static JSONObject parseJson() {
@@ -49,7 +51,7 @@ public class CliftonTest {
             e.printStackTrace();
         }
 
-        return jsonObject;
+       return jsonObject;
 
     }
 
@@ -71,17 +73,17 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/h3")).getText(),"Clifton Clunie");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/h3")).getText(),pageInfo.get("name"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[1]")).getText(),"Computer System Engineer");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[1]")).getText(),pageInfo.get("profession"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[2]")).getText(),"Panama, Panama");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[2]")).getText(),pageInfo.get("country"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
@@ -92,17 +94,17 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("//div[2]/p")).getText(), "clifton.clunie26@gmail.com");
+            Assert.assertEquals(driver.findElement(By.xpath("//div[2]/p")).getText(), pageInfo.get("email"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[2]")).getText(), "@clifton26");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[2]")).getText(), pageInfo.get("github"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[3]")).getText(), "@titon26");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[3]")).getText(), pageInfo.get("twitter"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
