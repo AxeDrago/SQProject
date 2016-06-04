@@ -1,5 +1,10 @@
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -15,6 +20,7 @@ public class CliftonTest {
     private static String baseUrl;
     private boolean acceptNextAlert = true;
     private static StringBuffer verificationErrors = new StringBuffer();
+    private static JSONObject pageInfo;
 
 
     @BeforeClass
@@ -24,6 +30,27 @@ public class CliftonTest {
        baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
        //baseUrl = "http://127.0.0.1:8080";
        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+
+       //java
+        pageInfo = parseJson();
+        System.out.println("hola"+pageInfo);
+    }
+
+    private static JSONObject parseJson() {
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = null;
+        try {
+
+             jsonObject  = (JSONObject) parser.parse(new FileReader("src/main/javascript/json/cliftonPage.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject;
+
     }
 
 
