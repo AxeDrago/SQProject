@@ -18,7 +18,7 @@
         ],
         "educationInformation": [
             {"areaName": "Education History",
-            "year": "2010",
+            "year": "2015",
             "course": "BSc., Computer Engineering",
             "duration": "2010-2015",
             "location": "Leiria, Portugal",
@@ -36,5 +36,5 @@
             {"name":"Portuguese", "type":"Native"},
             {"name":"English", "type":"Fluent"},
             {"name":"French", "type":"Basic"}
-        ],
+        ]
 }
