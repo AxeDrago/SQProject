@@ -287,10 +287,10 @@ public class MaiaTests{
         }
     }
     @Test
-    public void testEducationStructure() throws Exception {
+    public void testWorkStructure() throws Exception {
         driver.get(baseUrl + "/MaiaPersonal.html");
         assertTrue(isElementPresent(By.cssSelector("div.timeline-badge.info")));
-        assertEquals("2015", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
+        assertEquals("2010", driver.findElement(By.cssSelector("div.timeline-badge.info")).getText());
         assertTrue(isElementPresent(By.cssSelector("h4.timeline-title")));
         assertEquals("Instituto Politécnico de Leiria", driver.findElement(By.cssSelector("h4.timeline-title")).getText());
         assertTrue(isElementPresent(By.cssSelector("small.text-muted")));
