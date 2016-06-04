@@ -1,12 +1,15 @@
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +27,7 @@ public class DiogoTests {
     private static WebDriver driver;
     private static String baseUrl;
     private static StringBuffer verificationErrors = new StringBuffer();
+    private static JSONObject pageInfo;
 
 
     @BeforeClass
@@ -34,9 +38,31 @@ public class DiogoTests {
         }else{
             baseUrl = "http://stagingserverqs.westeurope.cloudapp.azure.com";
         }
+
+        pageInfo = parseJson();
+
+        System.out.println(pageInfo);
+
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    private static JSONObject parseJson() {
+        JSONParser parser = new JSONParser();
+
+        JSONObject jsonObject = null;
+
+        try {
+
+            //jsonObject  = (JSONObject) parser.parse(new FileReader("/D:/Mega/MEGAsync/IntelliJProjects/SQ_Project/src/main/javascript/json/memberPageScripts.txt"));
+            jsonObject  = (JSONObject) parser.parse(new FileReader("src/main/javascript/json/diogoPageInfo.txt"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject;
+    }
 
     @Test
     public void testHomeLinkCorrect() throws Exception{
@@ -268,8 +294,6 @@ public class DiogoTests {
 
     @Test
     public void testPersonalPageLinkGithubExists() throws Exception{
-
-
         driver.get(baseUrl + "/");
         driver.findElement(By.xpath("//a/div")).click();
         assertTrue("Element for github isn't show",driver.findElement(By.xpath("//p[@id='github']/a")).isDisplayed());
@@ -338,12 +362,10 @@ public class DiogoTests {
         assertEquals(2, tabs.size());
         assertEquals(tabs.get(0), firstTab);
 
-
         if(tabs.get(0).equals(firstTab)){
             driver.switchTo().window(tabs.get(1));
 
             assertTrue( "Expected: @DBernardoL || Reallity: " + driver.getTitle() + tabs ,driver.getTitle().matches(".*" + "@DBernardoL" + ".*"));
-
             driver.close();
             driver.switchTo().window(tabs.get(0));
         }else{
@@ -551,7 +573,6 @@ public class DiogoTests {
             assertEquals("SQ Project Pipeline", driver.getTitle());
         }
     }
-
 
     @AfterClass
     public static void tearDown() throws Exception {

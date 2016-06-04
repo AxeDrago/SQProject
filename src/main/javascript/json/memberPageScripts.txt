@@ -1,7 +1,4 @@
-/**
- * Created by Clifton on 31/5/16.
- */
-memberPageArray([
+
     {
         "name":"Clifton E. Clunie T.",
         "country":"Panama",
@@ -12,5 +9,5 @@ memberPageArray([
         "social_media_link":"Facebook, Twitter, Instagram, Snapchat",
         "professional_exp":"DELL, Cibernetica, S.A"
     }
-]);
+
 

@@ -2,8 +2,7 @@
  * Created by Clifton on 31/5/16.
  */
 function memberPageArray(arr){
-
-
+    
     var name =  arr[0].name;
     var country = arr[0].country;
     var address = arr[0].address;
