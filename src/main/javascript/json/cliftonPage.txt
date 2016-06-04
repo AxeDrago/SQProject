@@ -14,7 +14,7 @@
                  "year":"2015",
                  "company":"Cibernetica S.A",
                  "position":"Business Intelligence Analyst",
-                 "duration":"April 2014 - August 2015",
+                 "duration":"April 2014 - August 2015 |",
                  "location":"Panama",
                  "department":"Development Department"
              },
@@ -22,7 +22,7 @@
                  "year":"2011",
                  "company":"Dell Inc",
                  "position":"Technical Support",
-                 "duration":"January 2011 - August 2011",
+                 "duration":"January 2011 - August 2011 |",
                  "location":"Panama",
                  "department":"Global Services Desk"
               }],
