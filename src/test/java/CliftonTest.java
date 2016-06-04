@@ -2,6 +2,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,7 +15,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import static org.junit.Assert.assertTrue;
+import static javafx.scene.input.KeyCode.J;
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.fail;
 
 public class CliftonTest {
@@ -21,7 +24,8 @@ public class CliftonTest {
     private static String baseUrl;
     private boolean acceptNextAlert = true;
     private static StringBuffer verificationErrors = new StringBuffer();
-    private static JSONObject pageInfo;
+    private static JSONObject pageInfo, wIObject,wIObject1,wIObject2,eHObject,sKObject,sKObject1,sKObject2,sKObject3,sKObject4,sKObject5,lIObject,lIObject1,lIObject2,lIObject3;
+
 
 
     @BeforeClass
@@ -35,7 +39,32 @@ public class CliftonTest {
 
        //java
         pageInfo = parseJson();
-        System.out.println("hola"+pageInfo);
+
+        JSONArray workInformationArray = (JSONArray) pageInfo.get("work information");
+        JSONArray educatioHistorynArray = (JSONArray) pageInfo.get("education history");
+        JSONArray skillsInformationnArray = (JSONArray) pageInfo.get("skillsInformation");
+        JSONArray languageInformationArray = (JSONArray) pageInfo.get("languageInformation");
+
+        wIObject = (JSONObject) workInformationArray.get(0);
+        wIObject1 = (JSONObject) workInformationArray.get(1);
+        wIObject2 = (JSONObject) workInformationArray.get(2);
+        eHObject = (JSONObject) educatioHistorynArray.get(0);
+        sKObject = (JSONObject) skillsInformationnArray.get(0);
+        sKObject1 = (JSONObject) skillsInformationnArray.get(1);
+        sKObject2 = (JSONObject) skillsInformationnArray.get(2);
+        sKObject3 = (JSONObject) skillsInformationnArray.get(3);
+        sKObject4 = (JSONObject) skillsInformationnArray.get(4);
+        sKObject5 = (JSONObject) skillsInformationnArray.get(5);
+        lIObject = (JSONObject) languageInformationArray.get(0);
+        lIObject1 = (JSONObject) languageInformationArray.get(1);
+        lIObject2 = (JSONObject) languageInformationArray.get(2);
+        lIObject3 = (JSONObject) languageInformationArray.get(3);
+
+        // System.out.print(edObject.get("areaName"));
+
+        System.out.println(pageInfo);
+
+
     }
 
     private static JSONObject parseJson() {
@@ -50,7 +79,7 @@ public class CliftonTest {
             e.printStackTrace();
         }
 
-        return jsonObject;
+       return jsonObject;
 
     }
 
@@ -72,17 +101,17 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/h3")).getText(),"Clifton Clunie");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/h3")).getText(),pageInfo.get("name"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[1]")).getText(),"Computer System Engineer");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[1]")).getText(),pageInfo.get("profession"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[2]")).getText(),"Panama, Panama");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[1]/p[2]")).getText(),pageInfo.get("country"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
@@ -93,17 +122,17 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("//div[2]/p")).getText(), "clifton.clunie26@gmail.com");
+            Assert.assertEquals(driver.findElement(By.xpath("//div[2]/p")).getText(), pageInfo.get("email"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[2]")).getText(), "@clifton26");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[2]")).getText(), pageInfo.get("github"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[3]")).getText(), "@titon26");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div/div/div/div[2]/p[3]")).getText(), pageInfo.get("twitter"));
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
@@ -114,8 +143,8 @@ public class CliftonTest {
     public void contactInformationLink() throws Exception {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
-        driver.findElement(By.linkText("@clifton26")).click();
-        driver.findElement(By.linkText("@titon26")).click();
+        driver.findElement(By.linkText(pageInfo.get("github").toString())).click();
+        driver.findElement(By.linkText(pageInfo.get("twitter").toString())).click();
     }
 
     @Test
@@ -123,47 +152,48 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[1]")).getText(), "Work History");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[1]")).getText(), wIObject.get("areaName"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[1]")).getText(), "2011");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[1]")).getText(), wIObject2.get("year"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/h4")).getText(), "Dell Inc");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/h4")).getText(), wIObject2.get("company"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/h4")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[1]/small")).getText(), "Technical Support");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[1]/small")).getText(), wIObject2.get("position"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[1]/small")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), "January 2011 - August 2011 |");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), wIObject2.get("duration"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[2]/small/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
             }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), "Panama");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), wIObject2.get("location"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[1]/p[2]/small/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[2]/p")).getText(), "Development Department");
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[2]/p")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[2]/p")).getText(), wIObject2.get("department"));
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[2]/p")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
+
 
     }
 
@@ -172,44 +202,44 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[1]")).getText(), "Work History");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[1]")).getText(), wIObject.get("areaName"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[1]")).getText(), "2015");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[1]")).getText(), wIObject1.get("year"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/h4")).getText(), "Cibernetica S.A");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/h4")).getText(), wIObject1.get("company"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/h4")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[1]/small")).getText(), "Business Intelligence Analyst");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[1]/small")).getText(), wIObject1.get("position"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[1]/small")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), "April 2014 - August 2015 |");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), wIObject1.get("duration"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), "Panama");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), wIObject1.get("location"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[1]/p[2]/small/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[2]/p")).getText(), "Global Services Desk");
-            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[2]/li/div[2]/div[2]/p")).isDisplayed());
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[2]/p")).getText(), wIObject1.get("department"));
+            assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[1]/li/div[2]/div[2]/p")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
@@ -220,43 +250,43 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[2]")).getText(), "Education History");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[2]")).getText(), eHObject.get("areaName"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/h3[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
           }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[1]")).getText(), "2013");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[1]")).getText(), eHObject.get("year"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
           }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/h4")).getText(), "Universidad Tecnologica de Panama");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/h4")).getText(), eHObject.get("university"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/h4")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
           }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[1]/small")).getText(), "Computer System Engineering");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[1]/small")).getText(), eHObject.get("course"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[1]/small")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
            }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), "2009-2013 |");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[1]")).getText(), eHObject.get("duration"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), "Panama");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[2]")).getText(), eHObject.get("location"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[1]/p[2]/small/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
           }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[2]/p")).getText(), "Bachelor Degree");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[2]/p")).getText(), eHObject.get("level"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/ul[3]/li/div[2]/div[2]/p")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -275,13 +305,13 @@ public class CliftonTest {
         driver.get(baseUrl);
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[1]/span[2]")).getText(), "Programing Skills");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[1]/span[2]")).getText(), sKObject.get("areaName"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[1]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
             }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/span")).getText(), "HTML");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/span")).getText(), sKObject1.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[1]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -294,7 +324,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/span")).getText(), "CSS");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/span")).getText(), sKObject2.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[2]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -307,7 +337,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/span")).getText(), "SQL");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/span")).getText(), sKObject3.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[3]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -320,7 +350,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/span")).getText(), "Java");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/span")).getText(), sKObject4.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[4]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -333,7 +363,7 @@ public class CliftonTest {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/span")).getText(), "Android");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/span")).getText(), sKObject5.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[1]/ul/li[5]/span")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
@@ -353,43 +383,43 @@ public class CliftonTest {
         driver.findElement(By.xpath("//div[2]/div/a/div/div/img")).click();
         assertTrue(driver.findElement(By.xpath("/html/body/div[1]/div/div/div[1]/img")).isDisplayed());
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).getText(), "Language Skills");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).getText(), lIObject.get("areaName"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/h3[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[2]")).getText(), "Spanish");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[2]")).getText(), lIObject1.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[1]")).getText(), "Native");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[1]")).getText(), lIObject1.get("type"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[1]/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[2]")).getText(), "Portuguese");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[2]")).getText(), lIObject2.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[1]")).getText(), "Good");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[1]")).getText(), lIObject2.get("type"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[2]/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[2]")).getText(), "English");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[2]")).getText(), lIObject3.get("name"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[2]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
         }
         try {
-            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[1]")).getText(), "Very Good");
+            Assert.assertEquals(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[1]")).getText(), lIObject3.get("type"));
             assertTrue(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div[2]/div[3]/ul/li[3]/span[1]")).isDisplayed());
         } catch (Error e) {
             verificationErrors.append(e.toString());
