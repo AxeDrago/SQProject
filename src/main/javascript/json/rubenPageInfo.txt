@@ -1,0 +1,40 @@
+{
+        "name": "Rúben Maia",
+        "profession": "Software Engineer",
+        "country": "Leiria, Portugal",
+        "teamName": "Team DCM",
+        "email": "maia.ruben@gmail.com",
+        "github": "@rbnmaia",
+        "twitter": "@ruben_maia",
+        "linkedin": " linkedin.com/in/rubenmaia",
+        "workInformation":[
+        {"areaName": "Work History",
+                    "year": "2010",
+                    "role": "Technical Support",
+                    "duration": "01/2010-04/2010",
+                    "location": "Leiria",
+                    "company": "Instituto Politécnico de Leiria",
+                    "description": "DEI - Technical Support"}
+        ],
+        "educationInformation": [
+            {"areaName": "Education History",
+            "year": "2010",
+            "course": "BSc., Computer Engineering",
+            "duration": "2010-2015",
+            "location": "Leiria, Portugal",
+            "description": "Bachelor Degree"}
+        ],
+        "skillsInformation": [
+            {"areaName":"Programming Skills"},
+            {"name":"HTML", "percentage":"100%"},
+            {"name":"CSS", "percentage":"80%"},
+            {"name":"PHP", "percentage":"75%"},
+            {"name":"ASP.NET", "percentage":"90%"}
+        ],
+        "languageInformation": [
+            {"areaName":"Language Skills"},
+            {"name":"Portuguese", "type":"Native"},
+            {"name":"English", "type":"Fluent"},
+            {"name":"French", "type":"Basic"}
+        ],
+}

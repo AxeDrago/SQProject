@@ -1,0 +1,57 @@
+
+    {
+        "name":"Clifton Clunie",
+        "profession":"Computer System Engineer",
+        "country":"Panama",
+        "email":"clifton.clunie26@gmail.com",
+        "github":"@clifton26",
+        "twitter":"@titon26",
+        "work information": [
+            {
+                "areaName":"Work History"
+            },
+             {
+                 "year":"2015",
+                 "company":"Cibernetica S.A",
+                 "position":"Business Intelligence Analyst",
+                 "duration":"April 2014 - August 2015",
+                 "location":"Panama",
+                 "department":"Development Department"
+             },
+             {
+                 "year":"2011",
+                 "company":"Dell Inc",
+                 "position":"Technical Support",
+                 "duration":"January 2011 - August 2011",
+                 "location":"Panama",
+                 "department":"Global Services Desk"
+              }],
+        "education history": [
+                    {
+                        "areaName":"Education History",
+                         "year":"2013",
+                         "university":"Universidad Tecnologica de Panama",
+                         "course":"Computer System Engineering",
+                         "duration":"2009-2013",
+                         "location":"Panama",
+                         "level":"Bachelor Degree"
+                     }],
+        "skillsInformation": [
+            {"areaName":"Programming Skills"},
+            {"name":"HTML", "percentage":"75%"},
+            {"name":"CSS", "percentage":"60%"},
+            {"name":"SQL", "percentage":"90%"},
+            {"name":"Java", "percentage":"75%"},
+            {"name":"Android", "percentage":"75%"}
+        ],
+
+        "languageInformation": [
+            {"areaName":"Language Skills"},
+            {"name":"Spanish", "type":"Native"},
+            {"name":"Portuguese", "type":"Good"},
+            {"name":"English", "type":"Very Good"}
+        ],
+
+    }
+
+
